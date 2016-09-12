@@ -1,316 +1,70 @@
 <?php
+/**
+ *  PHP Version 5
+ *
+ * @category    Amazon
+ * @package     MarketplaceWebService
+ * @copyright   Copyright 2009 Amazon Technologies, Inc.
+ * @link        http://aws.amazon.com
+ * @license     http://aws.amazon.com/apache2.0  Apache License, Version 2.0
+ * @version     2009-01-01
+ */
 /*******************************************************************************
- * Copyright 2009-2015 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License"); 
  *
- * You may not use this file except in compliance with the License. 
- * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
- * specific language governing permissions and limitations under the License.
- *******************************************************************************
- * PHP Version 5
- * @category Amazon
- * @package  MWS Finances Service
- * @version  2015-05-01
- * Library Version: 2015-09-03
- * Generated: Thu Sep 03 17:55:25 GMT 2015
- */
-
-/**
- *  @see MWSFinancesService_Interface
- */
-require_once (dirname(__FILE__) . '/Interface.php');
-
-/**
- * MWSFinancesService_Client is an implementation of MWSFinancesService
+ *  Marketplace Web Service PHP5 Library
+ *  Generated: Thu May 07 13:07:36 PDT 2009
  *
  */
-class MWSFinancesService_Client implements MWSFinancesService_Interface
+
+define('CONVERTED_PARAMETERS_KEY', 'PARAMETERS');
+define('CONVERTED_HEADERS_KEY', 'HEADERS');
+
+/**
+ * The Amazon Marketplace Web Service contain APIs for inventory and order management.
+ *
+ * MarketplaceWebService_Client is an implementation of MarketplaceWebService
+ *
+ */
+class MarketplaceWebService_Client implements MarketplaceWebService_Interface
 {
 
-    const SERVICE_VERSION = '2015-05-01';
-    const MWS_CLIENT_VERSION = '2015-09-03';
+    /** @var string */
+    private $awsAccessKeyId = null;
 
     /** @var string */
-    private  $_awsAccessKeyId = null;
-
-    /** @var string */
-    private  $_awsSecretAccessKey = null;
+    private $awsSecretAccessKey = null;
 
     /** @var array */
-    private  $_config = array ('ServiceURL' => null,
-                               'UserAgent' => 'MWSFinancesService PHP5 Library',
-                               'SignatureVersion' => 2,
-                               'SignatureMethod' => 'HmacSHA256',
-                               'ProxyHost' => null,
-                               'ProxyPort' => -1,
-                               'ProxyUsername' => null,
-                               'ProxyPassword' => null,
-                               'MaxErrorRetry' => 3,
-                               'Headers' => array()
-                               );
+    private $config = array(
+        'ServiceURL' => null,
+        'UserAgent' => 'PHP Client Library/2014-09-30 (Language=PHP5)',
+        'SignatureVersion' => 2,
+        'SignatureMethod' => 'HmacSHA256',
+        'ProxyHost' => null,
+        'ProxyPort' => -1,
+        'MaxErrorRetry' => 3,
+        'Headers' => array(),
+        'SSL_VerifyPeer' => true,
+        'MarketPlaces' => [],
+        'SSL_VerifyHost' => 2,
+    );
 
+    const SERVICE_VERSION = '2009-01-01';
 
-    /**
-     * List Financial Event Groups
-     * ListFinancialEventGroups can be used to find financial event groups that meet filter criteria.
-     *
-     * @param mixed $request array of parameters for MWSFinancesService_Model_ListFinancialEventGroups request or MWSFinancesService_Model_ListFinancialEventGroups object itself
-     * @see MWSFinancesService_Model_ListFinancialEventGroupsRequest
-     * @return MWSFinancesService_Model_ListFinancialEventGroupsResponse
-     *
-     * @throws MWSFinancesService_Exception
-     */
-    public function listFinancialEventGroups($request)
-    {
-        if (!($request instanceof MWSFinancesService_Model_ListFinancialEventGroupsRequest)) {
-            require_once (dirname(__FILE__) . '/Model/ListFinancialEventGroupsRequest.php');
-            $request = new MWSFinancesService_Model_ListFinancialEventGroupsRequest($request);
-        }
-        $parameters = $request->toQueryParameterArray();
-        $parameters['Action'] = 'ListFinancialEventGroups';
-        $httpResponse = $this->_invoke($parameters);
+    const REQUEST_TYPE = "POST";
 
-        require_once (dirname(__FILE__) . '/Model/ListFinancialEventGroupsResponse.php');
-        $response = MWSFinancesService_Model_ListFinancialEventGroupsResponse::fromXML($httpResponse['ResponseBody']);
-        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
-        return $response;
-    }
+    const MWS_CLIENT_VERSION = '2014-09-30';
 
+    private $defaultHeaders = array();
 
-    /**
-     * Convert ListFinancialEventGroupsRequest to name value pairs
-     */
-    private function _convertListFinancialEventGroups($request) {
+    private $responseBodyContents;
 
-        $parameters = array();
-        $parameters['Action'] = 'ListFinancialEventGroups';
-        if ($request->isSetSellerId()) {
-            $parameters['SellerId'] =  $request->getSellerId();
-        }
-        if ($request->isSetMWSAuthToken()) {
-            $parameters['MWSAuthToken'] =  $request->getMWSAuthToken();
-        }
-        if ($request->isSetMaxResultsPerPage()) {
-            $parameters['MaxResultsPerPage'] =  $request->getMaxResultsPerPage();
-        }
-        if ($request->isSetFinancialEventGroupStartedAfter()) {
-            $parameters['FinancialEventGroupStartedAfter'] =  $request->getFinancialEventGroupStartedAfter();
-        }
-        if ($request->isSetFinancialEventGroupStartedBefore()) {
-            $parameters['FinancialEventGroupStartedBefore'] =  $request->getFinancialEventGroupStartedBefore();
-        }
+    // "streaming" responses that are errors will be send to this handle;
+    private $errorResponseBody;
 
-        return $parameters;
-    }
+    private $headerContents;
 
-
-    /**
-     * List Financial Event Groups By Next Token
-     * If ListFinancialEventGroups returns a nextToken, thus indicating that there are more groups
-     *         than returned that matched the given filter criteria, ListFinancialEventGroupsByNextToken
-     *         can be used to retrieve those groups using that nextToken.
-     *
-     * @param mixed $request array of parameters for MWSFinancesService_Model_ListFinancialEventGroupsByNextToken request or MWSFinancesService_Model_ListFinancialEventGroupsByNextToken object itself
-     * @see MWSFinancesService_Model_ListFinancialEventGroupsByNextTokenRequest
-     * @return MWSFinancesService_Model_ListFinancialEventGroupsByNextTokenResponse
-     *
-     * @throws MWSFinancesService_Exception
-     */
-    public function listFinancialEventGroupsByNextToken($request)
-    {
-        if (!($request instanceof MWSFinancesService_Model_ListFinancialEventGroupsByNextTokenRequest)) {
-            require_once (dirname(__FILE__) . '/Model/ListFinancialEventGroupsByNextTokenRequest.php');
-            $request = new MWSFinancesService_Model_ListFinancialEventGroupsByNextTokenRequest($request);
-        }
-        $parameters = $request->toQueryParameterArray();
-        $parameters['Action'] = 'ListFinancialEventGroupsByNextToken';
-        $httpResponse = $this->_invoke($parameters);
-
-        require_once (dirname(__FILE__) . '/Model/ListFinancialEventGroupsByNextTokenResponse.php');
-        $response = MWSFinancesService_Model_ListFinancialEventGroupsByNextTokenResponse::fromXML($httpResponse['ResponseBody']);
-        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
-        return $response;
-    }
-
-
-    /**
-     * Convert ListFinancialEventGroupsByNextTokenRequest to name value pairs
-     */
-    private function _convertListFinancialEventGroupsByNextToken($request) {
-
-        $parameters = array();
-        $parameters['Action'] = 'ListFinancialEventGroupsByNextToken';
-        if ($request->isSetSellerId()) {
-            $parameters['SellerId'] =  $request->getSellerId();
-        }
-        if ($request->isSetMWSAuthToken()) {
-            $parameters['MWSAuthToken'] =  $request->getMWSAuthToken();
-        }
-        if ($request->isSetNextToken()) {
-            $parameters['NextToken'] =  $request->getNextToken();
-        }
-
-        return $parameters;
-    }
-
-
-    /**
-     * List Financial Events
-     * ListFinancialEvents can be used to find financial events that meet the specified criteria.
-     *
-     * @param mixed $request array of parameters for MWSFinancesService_Model_ListFinancialEvents request or MWSFinancesService_Model_ListFinancialEvents object itself
-     * @see MWSFinancesService_Model_ListFinancialEventsRequest
-     * @return MWSFinancesService_Model_ListFinancialEventsResponse
-     *
-     * @throws MWSFinancesService_Exception
-     */
-    public function listFinancialEvents($request)
-    {
-        if (!($request instanceof MWSFinancesService_Model_ListFinancialEventsRequest)) {
-            require_once (dirname(__FILE__) . '/Model/ListFinancialEventsRequest.php');
-            $request = new MWSFinancesService_Model_ListFinancialEventsRequest($request);
-        }
-        $parameters = $request->toQueryParameterArray();
-        $parameters['Action'] = 'ListFinancialEvents';
-        $httpResponse = $this->_invoke($parameters);
-
-        require_once (dirname(__FILE__) . '/Model/ListFinancialEventsResponse.php');
-        $response = MWSFinancesService_Model_ListFinancialEventsResponse::fromXML($httpResponse['ResponseBody']);
-        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
-        return $response;
-    }
-
-
-    /**
-     * Convert ListFinancialEventsRequest to name value pairs
-     */
-    private function _convertListFinancialEvents($request) {
-
-        $parameters = array();
-        $parameters['Action'] = 'ListFinancialEvents';
-        if ($request->isSetSellerId()) {
-            $parameters['SellerId'] =  $request->getSellerId();
-        }
-        if ($request->isSetMWSAuthToken()) {
-            $parameters['MWSAuthToken'] =  $request->getMWSAuthToken();
-        }
-        if ($request->isSetMaxResultsPerPage()) {
-            $parameters['MaxResultsPerPage'] =  $request->getMaxResultsPerPage();
-        }
-        if ($request->isSetAmazonOrderId()) {
-            $parameters['AmazonOrderId'] =  $request->getAmazonOrderId();
-        }
-        if ($request->isSetFinancialEventGroupId()) {
-            $parameters['FinancialEventGroupId'] =  $request->getFinancialEventGroupId();
-        }
-        if ($request->isSetPostedAfter()) {
-            $parameters['PostedAfter'] =  $request->getPostedAfter();
-        }
-        if ($request->isSetPostedBefore()) {
-            $parameters['PostedBefore'] =  $request->getPostedBefore();
-        }
-
-        return $parameters;
-    }
-
-
-    /**
-     * List Financial Events By Next Token
-     * If ListFinancialEvents returns a nextToken, thus indicating that there are more financial events
-     *         than returned that matched the given filter criteria, ListFinancialEventsByNextToken
-     *         can be used to retrieve those events using that nextToken.
-     *
-     * @param mixed $request array of parameters for MWSFinancesService_Model_ListFinancialEventsByNextToken request or MWSFinancesService_Model_ListFinancialEventsByNextToken object itself
-     * @see MWSFinancesService_Model_ListFinancialEventsByNextTokenRequest
-     * @return MWSFinancesService_Model_ListFinancialEventsByNextTokenResponse
-     *
-     * @throws MWSFinancesService_Exception
-     */
-    public function listFinancialEventsByNextToken($request)
-    {
-        if (!($request instanceof MWSFinancesService_Model_ListFinancialEventsByNextTokenRequest)) {
-            require_once (dirname(__FILE__) . '/Model/ListFinancialEventsByNextTokenRequest.php');
-            $request = new MWSFinancesService_Model_ListFinancialEventsByNextTokenRequest($request);
-        }
-        $parameters = $request->toQueryParameterArray();
-        $parameters['Action'] = 'ListFinancialEventsByNextToken';
-        $httpResponse = $this->_invoke($parameters);
-
-        require_once (dirname(__FILE__) . '/Model/ListFinancialEventsByNextTokenResponse.php');
-        $response = MWSFinancesService_Model_ListFinancialEventsByNextTokenResponse::fromXML($httpResponse['ResponseBody']);
-        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
-        return $response;
-    }
-
-
-    /**
-     * Convert ListFinancialEventsByNextTokenRequest to name value pairs
-     */
-    private function _convertListFinancialEventsByNextToken($request) {
-
-        $parameters = array();
-        $parameters['Action'] = 'ListFinancialEventsByNextToken';
-        if ($request->isSetSellerId()) {
-            $parameters['SellerId'] =  $request->getSellerId();
-        }
-        if ($request->isSetMWSAuthToken()) {
-            $parameters['MWSAuthToken'] =  $request->getMWSAuthToken();
-        }
-        if ($request->isSetNextToken()) {
-            $parameters['NextToken'] =  $request->getNextToken();
-        }
-
-        return $parameters;
-    }
-
-
-    /**
-     * Get Service Status
-     * 
-     *
-     * @param mixed $request array of parameters for MWSFinancesService_Model_GetServiceStatus request or MWSFinancesService_Model_GetServiceStatus object itself
-     * @see MWSFinancesService_Model_GetServiceStatusRequest
-     * @return MWSFinancesService_Model_GetServiceStatusResponse
-     *
-     * @throws MWSFinancesService_Exception
-     */
-    public function getServiceStatus($request)
-    {
-        if (!($request instanceof MWSFinancesService_Model_GetServiceStatusRequest)) {
-            require_once (dirname(__FILE__) . '/Model/GetServiceStatusRequest.php');
-            $request = new MWSFinancesService_Model_GetServiceStatusRequest($request);
-        }
-        $parameters = $request->toQueryParameterArray();
-        $parameters['Action'] = 'GetServiceStatus';
-        $httpResponse = $this->_invoke($parameters);
-
-        require_once (dirname(__FILE__) . '/Model/GetServiceStatusResponse.php');
-        $response = MWSFinancesService_Model_GetServiceStatusResponse::fromXML($httpResponse['ResponseBody']);
-        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
-        return $response;
-    }
-
-
-    /**
-     * Convert GetServiceStatusRequest to name value pairs
-     */
-    private function _convertGetServiceStatus($request) {
-
-        $parameters = array();
-        $parameters['Action'] = 'GetServiceStatus';
-        if ($request->isSetSellerId()) {
-            $parameters['SellerId'] =  $request->getSellerId();
-        }
-        if ($request->isSetMWSAuthToken()) {
-            $parameters['MWSAuthToken'] =  $request->getMWSAuthToken();
-        }
-
-        return $parameters;
-    }
-
-
+    private $curlClient;
 
     /**
      * Construct new Client
@@ -318,59 +72,84 @@ class MWSFinancesService_Client implements MWSFinancesService_Interface
      * @param string $awsAccessKeyId AWS Access Key ID
      * @param string $awsSecretAccessKey AWS Secret Access Key
      * @param array $config configuration options.
-     * Valid configuration options are:
-     * <ul>
-     * <li>ServiceURL</li>
-     * <li>UserAgent</li>
-     * <li>SignatureVersion</li>
-     * <li>TimesRetryOnError</li>
-     * <li>ProxyHost</li>
-     * <li>ProxyPort</li>
-     * <li>ProxyUsername<li>
-     * <li>ProxyPassword<li>
-     * <li>MaxErrorRetry</li>
-     * </ul>
+     * @param string $applicationName application name.
+     * @param string $applicationVersion application version.
+     * @param array $attributes user-agent attributes
      */
-    public function __construct($awsAccessKeyId, $awsSecretAccessKey, $applicationName, $applicationVersion, $config = null)
-    {
-        iconv_set_encoding('output_encoding', 'UTF-8');
-        iconv_set_encoding('input_encoding', 'UTF-8');
-        iconv_set_encoding('internal_encoding', 'UTF-8');
-
-        $this->_awsAccessKeyId = $awsAccessKeyId;
-        $this->_awsSecretAccessKey = $awsSecretAccessKey;
-        if (!is_null($config)) $this->_config = array_merge($this->_config, $config);
-        $this->setUserAgentHeader($applicationName, $applicationVersion);
-    }
-
-    private function setUserAgentHeader(
+    public function __construct(
+        $awsAccessKeyId,
+        $awsSecretAccessKey,
+        $config,
         $applicationName,
         $applicationVersion,
-        $attributes = null) {
-
-        if (is_null($attributes)) {
-            $attributes = array ();
+        $attributes = null
+    ) {
+        if(version_compare(PHP_VERSION, '5.6.0', '<')) {
+            iconv_set_encoding('output_encoding', 'UTF-8');
+            iconv_set_encoding('input_encoding', 'UTF-8');
+            iconv_set_encoding('internal_encoding', 'UTF-8');
         }
 
-        $this->_config['UserAgent'] = 
-            $this->constructUserAgentHeader($applicationName, $applicationVersion, $attributes);
+        $this->awsAccessKeyId = $awsAccessKeyId;
+        $this->awsSecretAccessKey = $awsSecretAccessKey;
+        if (!is_null($config)) {
+            $this->config = array_merge($this->config, $config);
+        }
+
+        $this->setUserAgentHeader($applicationName, $applicationVersion, $attributes);
     }
 
-    private function constructUserAgentHeader($applicationName, $applicationVersion, $attributes = null) {
+    /**
+     * Sets a MWS compliant HTTP User-Agent Header value.
+     * $attributeNameValuePairs is an associative array.
+     *
+     * @param string $applicationName
+     * @param string $applicationVersion
+     * @param mixed $attributes
+     */
+    public function setUserAgentHeader(
+        $applicationName,
+        $applicationVersion,
+        $attributes = null
+    ) {
+
+        if (is_null($attributes)) {
+            $attributes = array();
+        }
+
+        $this->config['UserAgent'] = $this->constructUserAgentHeader($applicationName, $applicationVersion,
+            $attributes);
+    }
+
+    /**
+     * Construct a valid MWS compliant HTTP User-Agent Header. From the MWS Developer's Guide, this
+     * entails:
+     * "To meet the requirements, begin with the name of your application, followed by a forward
+     * slash, followed by the version of the application, followed by a space, an opening
+     * parenthesis, the Language name value pair, and a closing paranthesis. The Language parameter
+     * is a required attribute, but you can add additional attributes separated by semi-colons."
+     *
+     * @param $applicationName
+     * @param $applicationVersion
+     * @param null $attributes
+     * @return string
+     * @internal param $additionalNameValuePairs
+     */
+    private function constructUserAgentHeader($applicationName, $applicationVersion, $attributes = null)
+    {
+
         if (is_null($applicationName) || $applicationName === "") {
-            throw new InvalidArgumentException('$applicationName cannot be null');
+            throw new InvalidArgumentException('$applicationName cannot be null.');
         }
 
         if (is_null($applicationVersion) || $applicationVersion === "") {
-            throw new InvalidArgumentException('$applicationVersion cannot be null');
+            throw new InvalidArgumentException('$applicationVersion cannot be null.');
         }
 
-        $userAgent = 
-            $this->quoteApplicationName($applicationName)
-            . '/'
-            . $this->quoteApplicationVersion($applicationVersion);
+        $userAgent = $this->quoteApplicationName($applicationName) . '/' . $this->quoteApplicationVersion($applicationVersion);
 
         $userAgent .= ' (';
+
         $userAgent .= 'Language=PHP/' . phpversion();
         $userAgent .= '; ';
         $userAgent .= 'Platform=' . php_uname('s') . '/' . php_uname('m') . '/' . php_uname('r');
@@ -378,29 +157,26 @@ class MWSFinancesService_Client implements MWSFinancesService_Interface
         $userAgent .= 'MWSClientVersion=' . self::MWS_CLIENT_VERSION;
 
         foreach ($attributes as $key => $value) {
-            if (empty($value)) {
+            if (is_null($value) || $value === '') {
                 throw new InvalidArgumentException("Value for $key cannot be null or empty.");
             }
 
-            $userAgent .= '; '
-                . $this->quoteAttributeName($key)
-                . '='
-                . $this->quoteAttributeValue($value);
+            $userAgent .= '; ' . $this->quoteAttributeName($key) . '=' . $this->quoteAttributeValue($value);
         }
-
         $userAgent .= ')';
 
         return $userAgent;
     }
 
-   /**
-    * Collapse multiple whitespace characters into a single ' ' character.
-    * @param $s
-    * @return string
-    */
-   private function collapseWhitespace($s) {
-       return preg_replace('/ {2,}|\s/', ' ', $s);
-   }
+    /**
+     * Collapse multiple whitespace characters into a single ' ' character.
+     * @param $s
+     * @return string
+     */
+    private function collapseWhitespace($s)
+    {
+        return preg_replace('/ {2,}|\s/', ' ', $s);
+    }
 
     /**
      * Collapse multiple whitespace characters into a single ' ' and backslash escape '\',
@@ -408,7 +184,8 @@ class MWSFinancesService_Client implements MWSFinancesService_Interface
      * @param $s
      * @return string
      */
-    private function quoteApplicationName($s) {
+    private function quoteApplicationName($s)
+    {
         $quotedString = $this->collapseWhitespace($s);
         $quotedString = preg_replace('/\\\\/', '\\\\\\\\', $quotedString);
         $quotedString = preg_replace('/\//', '\\/', $quotedString);
@@ -423,7 +200,8 @@ class MWSFinancesService_Client implements MWSFinancesService_Interface
      * @param $s
      * @return string
      */
-    private function quoteApplicationVersion($s) {
+    private function quoteApplicationVersion($s)
+    {
         $quotedString = $this->collapseWhitespace($s);
         $quotedString = preg_replace('/\\\\/', '\\\\\\\\', $quotedString);
         $quotedString = preg_replace('/\\(/', '\\(', $quotedString);
@@ -435,10 +213,11 @@ class MWSFinancesService_Client implements MWSFinancesService_Interface
      * Collapse multiple whitespace characters into a single ' ' and backslash escape '\',
      * and '=' characters from a string.
      *
-     * @param $s
-     * @return unknown_type
+     * @param string $s
+     * @return string
      */
-    private function quoteAttributeName($s) {
+    private function quoteAttributeName($s)
+    {
         $quotedString = $this->collapseWhitespace($s);
         $quotedString = preg_replace('/\\\\/', '\\\\\\\\', $quotedString);
         $quotedString = preg_replace('/\\=/', '\\=', $quotedString);
@@ -450,10 +229,11 @@ class MWSFinancesService_Client implements MWSFinancesService_Interface
      * Collapse multiple whitespace characters into a single ' ' and backslash escape ';', '\',
      * and ')' characters from a string.
      *
-     * @param $s
-     * @return unknown_type
+     * @param string $s
+     * @return string
      */
-    private function quoteAttributeValue($s) {
+    private function quoteAttributeValue($s)
+    {
         $quotedString = $this->collapseWhitespace($s);
         $quotedString = preg_replace('/\\\\/', '\\\\\\\\', $quotedString);
         $quotedString = preg_replace('/\\;/', '\\;', $quotedString);
@@ -462,48 +242,605 @@ class MWSFinancesService_Client implements MWSFinancesService_Interface
         return $quotedString;
     }
 
+    // Public API ------------------------------------------------------------//
+
+    /**
+     * Get Report
+     * The GetReport operation returns the contents of a report. Reports can potentially be
+     * very large (>100MB) which is why we only return one report at a time, and in a
+     * streaming fashion.
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}GetReport.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_GetReportRequest request
+     * or MarketplaceWebService_Model_GetReportRequest object itself
+     * @see MarketplaceWebService_Model_GetReport
+     * @return MarketplaceWebService_Model_GetReportResponse MarketplaceWebService_Model_GetReportResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function getReport($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_GetReportRequest) {
+            $request = new MarketplaceWebService_Model_GetReportRequest($request);
+        }
+
+        $httpResponse = $this->invoke($this->convertGetReport($request), $request->getReport());
+        $response = MarketplaceWebService_Model_GetReportResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Get Report Schedule Count
+     * returns the number of report schedules
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}GetReportScheduleCount.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_GetReportScheduleCountRequest request
+     * or MarketplaceWebService_Model_GetReportScheduleCountRequest object itself
+     * @see MarketplaceWebService_Model_GetReportScheduleCount
+     * @return MarketplaceWebService_Model_GetReportScheduleCountResponse MarketplaceWebService_Model_GetReportScheduleCountResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function getReportScheduleCount($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_GetReportScheduleCountRequest) {
+            $request = new MarketplaceWebService_Model_GetReportScheduleCountRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertGetReportScheduleCount($request));
+        $response = MarketplaceWebService_Model_GetReportScheduleCountResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Get Report Request List By Next Token
+     * retrieve the next batch of list items and if there are more items to retrieve
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}GetReportRequestListByNextToken.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_GetReportRequestListByNextTokenRequest request
+     * or MarketplaceWebService_Model_GetReportRequestListByNextTokenRequest object itself
+     * @see MarketplaceWebService_Model_GetReportRequestListByNextToken
+     * @return MarketplaceWebService_Model_GetReportRequestListByNextTokenResponse MarketplaceWebService_Model_GetReportRequestListByNextTokenResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function getReportRequestListByNextToken($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_GetReportRequestListByNextTokenRequest) {
+            $request = new MarketplaceWebService_Model_GetReportRequestListByNextTokenRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertGetReportRequestListByNextToken($request));
+        $response = MarketplaceWebService_Model_GetReportRequestListByNextTokenResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Update Report Acknowledgements
+     * The UpdateReportAcknowledgements operation updates the acknowledged status of one or more reports.
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}UpdateReportAcknowledgements.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_UpdateReportAcknowledgementsRequest request
+     * or MarketplaceWebService_Model_UpdateReportAcknowledgementsRequest object itself
+     * @see MarketplaceWebService_Model_UpdateReportAcknowledgements
+     * @return MarketplaceWebService_Model_UpdateReportAcknowledgementsResponse MarketplaceWebService_Model_UpdateReportAcknowledgementsResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function updateReportAcknowledgements($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_UpdateReportAcknowledgementsRequest) {
+            $request = new MarketplaceWebService_Model_UpdateReportAcknowledgementsRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertUpdateReportAcknowledgements($request));
+        $response = MarketplaceWebService_Model_UpdateReportAcknowledgementsResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Submit Feed
+     * Uploads a file for processing together with the necessary
+     * metadata to process the file, such as which type of feed it is.
+     * PurgeAndReplace if true means that your existing e.g. inventory is
+     * wiped out and replace with the contents of this feed - use with
+     * caution (the default is false).
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}SubmitFeed.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_SubmitFeedRequest request
+     * or MarketplaceWebService_Model_SubmitFeedRequest object itself
+     * @see MarketplaceWebService_Model_SubmitFeed
+     * @return MarketplaceWebService_Model_SubmitFeedResponse MarketplaceWebService_Model_SubmitFeedResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function submitFeed($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_SubmitFeedRequest) {
+            $request = new MarketplaceWebService_Model_SubmitFeedRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertSubmitFeed($request), $request->getFeedContent(),
+            $request->getContentMd5());
+        $response = MarketplaceWebService_Model_SubmitFeedResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Get Report Count
+     * returns a count of reports matching your criteria;
+     * by default, the number of reports generated in the last 90 days,
+     * regardless of acknowledgement status
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}GetReportCount.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_GetReportCountRequest request
+     * or MarketplaceWebService_Model_GetReportCountRequest object itself
+     * @see MarketplaceWebService_Model_GetReportCount
+     * @return MarketplaceWebService_Model_GetReportCountResponse MarketplaceWebService_Model_GetReportCountResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function getReportCount($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_GetReportCountRequest) {
+            $request = new MarketplaceWebService_Model_GetReportCountRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertGetReportCount($request));
+        $response = MarketplaceWebService_Model_GetReportCountResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Get Feed Submission List By Next Token
+     * retrieve the next batch of list items and if there are more items to retrieve
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}GetFeedSubmissionListByNextToken.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_GetFeedSubmissionListByNextTokenRequest request
+     * or MarketplaceWebService_Model_GetFeedSubmissionListByNextTokenRequest object itself
+     * @see MarketplaceWebService_Model_GetFeedSubmissionListByNextToken
+     * @return MarketplaceWebService_Model_GetFeedSubmissionListByNextTokenResponse MarketplaceWebService_Model_GetFeedSubmissionListByNextTokenResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function getFeedSubmissionListByNextToken($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_GetFeedSubmissionListByNextTokenRequest) {
+            $request = new MarketplaceWebService_Model_GetFeedSubmissionListByNextTokenRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertGetFeedSubmissionListByNextToken($request));
+        $response = MarketplaceWebService_Model_GetFeedSubmissionListByNextTokenResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Cancel Feed Submissions
+     * cancels feed submissions - by default all of the submissions of the
+     * last 30 days that have not started processing
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}CancelFeedSubmissions.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_CancelFeedSubmissionsRequest request
+     * or MarketplaceWebService_Model_CancelFeedSubmissionsRequest object itself
+     * @see MarketplaceWebService_Model_CancelFeedSubmissions
+     * @return MarketplaceWebService_Model_CancelFeedSubmissionsResponse MarketplaceWebService_Model_CancelFeedSubmissionsResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function cancelFeedSubmissions($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_CancelFeedSubmissionsRequest) {
+            $request = new MarketplaceWebService_Model_CancelFeedSubmissionsRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertCancelFeedSubmissions($request));
+        $response = MarketplaceWebService_Model_CancelFeedSubmissionsResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Request Report
+     * requests the generation of a report
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}RequestReport.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_RequestReportRequest request
+     * or MarketplaceWebService_Model_RequestReportRequest object itself
+     * @see MarketplaceWebService_Model_RequestReport
+     * @return MarketplaceWebService_Model_RequestReportResponse MarketplaceWebService_Model_RequestReportResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function requestReport($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_RequestReportRequest) {
+            $request = new MarketplaceWebService_Model_RequestReportRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertRequestReport($request));
+        $response = MarketplaceWebService_Model_RequestReportResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Get Feed Submission Count
+     * returns the number of feeds matching all of the specified criteria
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}GetFeedSubmissionCount.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_GetFeedSubmissionCountRequest request
+     * or MarketplaceWebService_Model_GetFeedSubmissionCountRequest object itself
+     * @see MarketplaceWebService_Model_GetFeedSubmissionCount
+     * @return MarketplaceWebService_Model_GetFeedSubmissionCountResponse MarketplaceWebService_Model_GetFeedSubmissionCountResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function getFeedSubmissionCount($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_GetFeedSubmissionCountRequest) {
+            $request = new MarketplaceWebService_Model_GetFeedSubmissionCountRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertGetFeedSubmissionCount($request));
+        $response = MarketplaceWebService_Model_GetFeedSubmissionCountResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Cancel Report Requests
+     * cancels report requests that have not yet started processing,
+     * by default all those within the last 90 days
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}CancelReportRequests.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_CancelReportRequestsRequest request
+     * or MarketplaceWebService_Model_CancelReportRequestsRequest object itself
+     * @see MarketplaceWebService_Model_CancelReportRequests
+     * @return MarketplaceWebService_Model_CancelReportRequestsResponse MarketplaceWebService_Model_CancelReportRequestsResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function cancelReportRequests($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_CancelReportRequestsRequest) {
+            $request = new MarketplaceWebService_Model_CancelReportRequestsRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertCancelReportRequests($request));
+        $response = MarketplaceWebService_Model_CancelReportRequestsResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Get Report List
+     * returns a list of reports; by default the most recent ten reports,
+     * regardless of their acknowledgement status
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}GetReportList.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_GetReportListRequest request
+     * or MarketplaceWebService_Model_GetReportListRequest object itself
+     * @see MarketplaceWebService_Model_GetReportList
+     * @return MarketplaceWebService_Model_GetReportListResponse MarketplaceWebService_Model_GetReportListResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function getReportList($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_GetReportListRequest) {
+            $request = new MarketplaceWebService_Model_GetReportListRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertGetReportList($request));
+        $response = MarketplaceWebService_Model_GetReportListResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Get Feed Submission Result
+     * retrieves the feed processing report
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}GetFeedSubmissionResult.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_GetFeedSubmissionResultRequest request
+     * or MarketplaceWebService_Model_GetFeedSubmissionResultRequest object itself
+     * @see MarketplaceWebService_Model_GetFeedSubmissionResult
+     * @return MarketplaceWebService_Model_GetFeedSubmissionResultResponse MarketplaceWebService_Model_GetFeedSubmissionResultResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function getFeedSubmissionResult($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_GetFeedSubmissionResultRequest) {
+            $request = new MarketplaceWebService_Model_GetFeedSubmissionResultRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertGetFeedSubmissionResult($request),
+            $request->getFeedSubmissionResult());
+        $response = MarketplaceWebService_Model_GetFeedSubmissionResultResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Get Feed Submission List
+     * returns a list of feed submission identifiers and their associated metadata
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}GetFeedSubmissionList.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_GetFeedSubmissionListRequest request
+     * or MarketplaceWebService_Model_GetFeedSubmissionListRequest object itself
+     * @see MarketplaceWebService_Model_GetFeedSubmissionList
+     * @return MarketplaceWebService_Model_GetFeedSubmissionListResponse MarketplaceWebService_Model_GetFeedSubmissionListResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function getFeedSubmissionList($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_GetFeedSubmissionListRequest) {
+            $request = new MarketplaceWebService_Model_GetFeedSubmissionListRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertGetFeedSubmissionList($request));
+        $response = MarketplaceWebService_Model_GetFeedSubmissionListResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Get Report Request List
+     * returns a list of report requests ids and their associated metadata
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}GetReportRequestList.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_GetReportRequestListRequest request
+     * or MarketplaceWebService_Model_GetReportRequestListRequest object itself
+     * @see MarketplaceWebService_Model_GetReportRequestList
+     * @return MarketplaceWebService_Model_GetReportRequestListResponse MarketplaceWebService_Model_GetReportRequestListResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function getReportRequestList($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_GetReportRequestListRequest) {
+            $request = new MarketplaceWebService_Model_GetReportRequestListRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertGetReportRequestList($request));
+        $response = MarketplaceWebService_Model_GetReportRequestListResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Get Report Schedule List By Next Token
+     * retrieve the next batch of list items and if there are more items to retrieve
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}GetReportScheduleListByNextToken.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_GetReportScheduleListByNextTokenRequest request
+     * or MarketplaceWebService_Model_GetReportScheduleListByNextTokenRequest object itself
+     * @see MarketplaceWebService_Model_GetReportScheduleListByNextToken
+     * @return MarketplaceWebService_Model_GetReportScheduleListByNextTokenResponse MarketplaceWebService_Model_GetReportScheduleListByNextTokenResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function getReportScheduleListByNextToken($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_GetReportScheduleListByNextTokenRequest) {
+            $request = new MarketplaceWebService_Model_GetReportScheduleListByNextTokenRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertGetReportScheduleListByNextToken($request));
+        $response = MarketplaceWebService_Model_GetReportScheduleListByNextTokenResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Get Report List By Next Token
+     * retrieve the next batch of list items and if there are more items to retrieve
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}GetReportListByNextToken.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_GetReportListByNextTokenRequest request
+     * or MarketplaceWebService_Model_GetReportListByNextTokenRequest object itself
+     * @see MarketplaceWebService_Model_GetReportListByNextToken
+     * @return MarketplaceWebService_Model_GetReportListByNextTokenResponse MarketplaceWebService_Model_GetReportListByNextTokenResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function getReportListByNextToken($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_GetReportListByNextTokenRequest) {
+            $request = new MarketplaceWebService_Model_GetReportListByNextTokenRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertGetReportListByNextToken($request));
+        $response = MarketplaceWebService_Model_GetReportListByNextTokenResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Manage Report Schedule
+     * Creates, updates, or deletes a report schedule
+     * for a given report type, such as order reports in particular.
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}ManageReportSchedule.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_ManageReportScheduleRequest request
+     * or MarketplaceWebService_Model_ManageReportScheduleRequest object itself
+     * @see MarketplaceWebService_Model_ManageReportSchedule
+     * @return MarketplaceWebService_Model_ManageReportScheduleResponse MarketplaceWebService_Model_ManageReportScheduleResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function manageReportSchedule($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_ManageReportScheduleRequest) {
+            $request = new MarketplaceWebService_Model_ManageReportScheduleRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertManageReportSchedule($request));
+        $response = MarketplaceWebService_Model_ManageReportScheduleResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Get Report Request Count
+     * returns a count of report requests; by default all the report
+     * requests in the last 90 days
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}GetReportRequestCount.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_GetReportRequestCountRequest request
+     * or MarketplaceWebService_Model_GetReportRequestCountRequest object itself
+     * @see MarketplaceWebService_Model_GetReportRequestCount
+     * @return MarketplaceWebService_Model_GetReportRequestCountResponse MarketplaceWebService_Model_GetReportRequestCountResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function getReportRequestCount($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_GetReportRequestCountRequest) {
+            $request = new MarketplaceWebService_Model_GetReportRequestCountRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertGetReportRequestCount($request));
+        $response = MarketplaceWebService_Model_GetReportRequestCountResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
+
+    /**
+     * Get Report Schedule List
+     * returns the list of report schedules
+     *
+     * @see http://docs.amazonwebservices.com/${docPath}GetReportScheduleList.html
+     * @param mixed $request array of parameters for MarketplaceWebService_Model_GetReportScheduleListRequest request
+     * or MarketplaceWebService_Model_GetReportScheduleListRequest object itself
+     * @see MarketplaceWebService_Model_GetReportScheduleList
+     * @return MarketplaceWebService_Model_GetReportScheduleListResponse MarketplaceWebService_Model_GetReportScheduleListResponse
+     *
+     * @throws MarketplaceWebService_Exception
+     */
+    public function getReportScheduleList($request)
+    {
+        if (!$request instanceof MarketplaceWebService_Model_GetReportScheduleListRequest) {
+            $request = new MarketplaceWebService_Model_GetReportScheduleListRequest($request);
+        }
+        $httpResponse = $this->invoke($this->convertGetReportScheduleList($request));
+        $response = MarketplaceWebService_Model_GetReportScheduleListResponse::fromXML($httpResponse['ResponseBody']);
+        $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
+        return $response;
+    }
 
     // Private API ------------------------------------------------------------//
 
     /**
-     * Invoke request and return response
+     * Get the base64 encoded md5 value of $data. If $data is a memory or temp file stream, this
+     * method dumps the contents into a string before calculating the md5. Hence, this method
+     * shouldn't be used for large memory streams.
+     *
+     * @param string $data
+     * @return string
      */
-    private function _invoke(array $parameters)
+    private function getContentMd5($data)
     {
-        try {
-            if (empty($this->_config['ServiceURL'])) {
-                require_once (dirname(__FILE__) . '/Exception.php');
-                throw new MWSFinancesService_Exception(
-                    array ('ErrorCode' => 'InvalidServiceURL',
-                           'Message' => "Missing serviceUrl configuration value. You may obtain a list of valid MWS URLs by consulting the MWS Developer's Guide, or reviewing the sample code published along side this library."));
+        $md5Hash = null;
+
+        if (is_string($data)) {
+            $md5Hash = md5($data, true);
+        } else if (is_resource($data)) {
+            // Assume $data is a stream.
+            $streamMetadata = stream_get_meta_data($data);
+
+            if ($streamMetadata['stream_type'] === 'MEMORY' || $streamMetadata['stream_type'] === 'TEMP') {
+                $md5Hash = md5(stream_get_contents($data), true);
+            } else {
+                $md5Hash = md5_file($streamMetadata['uri'], true);
             }
-            $parameters = $this->_addRequiredParameters($parameters);
-            $retries = 0;
-            for (;;) {
-                $response = $this->_httpPost($parameters);
-                $status = $response['Status'];
-                if ($status == 200) {
-                    return array('ResponseBody' => $response['ResponseBody'],
-                      'ResponseHeaderMetadata' => $response['ResponseHeaderMetadata']);
-                }
-                if ($status == 500 && $this->_pauseOnRetry(++$retries)) {
-                    continue;
-                }
-                throw $this->_reportAnyErrors($response['ResponseBody'],
-                    $status, $response['ResponseHeaderMetadata']);
-            }
-        } catch (MWSFinancesService_Exception $se) {
-            throw $se;
-        } catch (Exception $t) {
-            require_once (dirname(__FILE__) . '/Exception.php');
-            throw new MWSFinancesService_Exception(array('Exception' => $t, 'Message' => $t->getMessage()));
         }
+
+        return base64_encode($md5Hash);
+    }
+
+    /**
+     * Invoke request and return response
+     * @param array $converted
+     * @param null $dataHandle
+     * @param null $contentMd5
+     * @return array
+     * @throws Exception
+     * @throws MarketplaceWebService_Exception
+     */
+    private function invoke(array $converted, $dataHandle = null, $contentMd5 = null)
+    {
+
+        $parameters = $converted[CONVERTED_PARAMETERS_KEY];
+        $actionName = $parameters["Action"];
+        $responseBody = null;
+
+        /* Submit the request and read response body */
+        try {
+
+            // Ensure the endpoint URL is set.
+            if (empty($this->config['ServiceURL'])) {
+                throw new MarketplaceWebService_Exception(array(
+                    'ErrorCode' => 'InvalidServiceUrl',
+                    'Message' => "Missing serviceUrl configuration value. You may obtain a list of valid MWS URLs by consulting the MWS Developer's Guide, or reviewing the sample code published along side this library."
+                ));
+            }
+
+            /* Add required request parameters */
+            $parameters = $this->addRequiredParameters($parameters);
+            $converted[CONVERTED_PARAMETERS_KEY] = $parameters;
+
+            $retries = 0;
+            do {
+                try {
+                    $response = $this->performRequest($actionName, $converted, $dataHandle, $contentMd5);
+
+                    $httpStatus = $response['Status'];
+
+                    switch ($httpStatus) {
+                        case 200:
+                            $shouldRetry = false;
+                            break;
+
+                        case 500:
+                        case 503:
+                            $errorResponse = MarketplaceWebService_Model_ErrorResponse::fromXML($response['ResponseBody']);
+
+                            // We will not retry throttling errors since this would just add to the throttling problem.
+                            $shouldRetry = ($errorResponse->getError()
+                                    ->getCode() === 'RequestThrottled') ? false : true;
+
+                            if ($shouldRetry && $retries <= $this->config['MaxErrorRetry']) {
+                                $this->pauseOnRetry(++$retries);
+                            } else {
+                                throw $this->reportAnyErrors($response['ResponseBody'], $response['Status'],
+                                    $response['ResponseHeaderMetadata']);
+                            }
+                            break;
+
+                        default:
+                            throw $this->reportAnyErrors($response['ResponseBody'], $response['Status'],
+                                $response['ResponseHeaderMetadata']);
+                            break;
+                    }
+
+                    /* Rethrow on deserializer error */
+                } catch(Exception $e) {
+                    throw new MarketplaceWebService_Exception(array('Exception' => $e, 'Message' => $e->getMessage()));
+                }
+
+            } while ($shouldRetry);
+
+        } catch(MarketplaceWebService_Exception $se) {
+            throw $se;
+        } catch(Exception $t) {
+            throw new MarketplaceWebService_Exception(array('Exception' => $t, 'Message' => $t->getMessage()));
+        }
+        return array(
+            'ResponseBody' => $response['ResponseBody'],
+            'ResponseHeaderMetadata' => $response['ResponseHeaderMetadata']
+        );
     }
 
     /**
      * Look for additional error strings in the response and return formatted exception
+     * @param $responseBody
+     * @param $status
+     * @param $responseHeaderMetadata
+     * @return MarketplaceWebService_Exception
      */
-    private function _reportAnyErrors($responseBody, $status, $responseHeaderMetadata, Exception $e =  null)
+    private function reportAnyErrors($responseBody, $status, $responseHeaderMetadata)
     {
         $exProps = array();
         $exProps["StatusCode"] = $status;
@@ -522,248 +859,340 @@ class MWSFinancesService_Client implements MWSFinancesService_Interface
             $exProps["Message"] = "Internal Error";
         }
 
-        require_once (dirname(__FILE__) . '/Exception.php');
-        return new MWSFinancesService_Exception($exProps);
+        return new MarketplaceWebService_Exception($exProps);
     }
 
-
-
     /**
-     * Perform HTTP post with exponential retries on error 500 and 503
+     * Setup and execute the request via cURL and return the server response.
      *
+     * @param $action - the MWS action to perform.
+     * @param array $converted
+     * @param $dataHandle - A stream handle to either a feed to upload, or a report/feed submission result to download.
+     * @param $contentMd5 - The Content-MD5 HTTP header value used for feed submissions.
+     * @return array
+     * @throws MarketplaceWebService_Exception
+     * @internal param $parameters - the MWS parameters for the Action.
      */
-    private function _httpPost(array $parameters)
+    private function performRequest($action, array $converted, $dataHandle = null, $contentMd5 = null)
     {
-        $config = $this->_config;
-        $query = $this->_getParametersAsString($parameters);
-        $url = parse_url ($config['ServiceURL']);
-        $uri = array_key_exists('path', $url) ? $url['path'] : null;
-        if (!isset ($uri)) {
-                $uri = "/";
+
+        $curlOptions = $this->configureCurlOptions($action, $converted, $dataHandle, $contentMd5);
+
+        if (is_null($curlOptions[CURLOPT_RETURNTRANSFER]) || !$curlOptions[CURLOPT_RETURNTRANSFER]) {
+            $curlOptions[CURLOPT_RETURNTRANSFER] = true;
         }
 
-        switch ($url['scheme']) {
-            case 'https':
-                $scheme = 'https://';
-                $port = isset($url['port']) ? $url['port'] : 443;
-                break;
-            default:
-                $scheme = 'http://';
-                $port = isset($url['port']) ? $url['port'] : 80;
-        }
+        $this->curlClient = curl_init();
+        curl_setopt_array($this->curlClient, $curlOptions);
 
-        $allHeaders = $config['Headers'];
-        $allHeaders['Content-Type'] = "application/x-www-form-urlencoded; charset=utf-8"; // We need to make sure to set utf-8 encoding here
-        $allHeaders['Expect'] = null; // Don't expect 100 Continue
-        $allHeadersStr = array();
-        foreach($allHeaders as $name => $val) {
-            $str = $name . ": ";
-            if(isset($val)) {
-                $str = $str . $val;
-            }
-            $allHeadersStr[] = $str;
-        }
+        $this->headerContents = @fopen('php://memory', 'rw+');
+        $this->errorResponseBody = @fopen('php://memory', 'rw+');
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $scheme . $url['host'] . $uri);
-        curl_setopt($ch, CURLOPT_PORT, $port);
-        $this->setSSLCurlOptions($ch);
-        curl_setopt($ch, CURLOPT_USERAGENT, $this->_config['UserAgent']);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $query);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $allHeadersStr);
-        curl_setopt($ch, CURLOPT_HEADER, true); 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        if ($config['ProxyHost'] != null && $config['ProxyPort'] != -1)
-        {
-            curl_setopt($ch, CURLOPT_PROXY, $config['ProxyHost'] . ':' . $config['ProxyPort']);
-        }
-        if ($config['ProxyUsername'] != null && $config['ProxyPassword'] != null)
-        {
-            curl_setopt($ch, CURLOPT_PROXYUSERPWD, $config['ProxyUsername'] . ':' . $config['ProxyPassword']);
-        }
+        $httpResponse = curl_exec($this->curlClient);
 
-        $response = "";
-        $response = curl_exec($ch);
+        rewind($this->headerContents);
+        $header = stream_get_contents($this->headerContents);
 
-        if($response === false) {
-            require_once (dirname(__FILE__) . '/Exception.php');
-            $exProps["Message"] = curl_error($ch);
-            $exProps["ErrorType"] = "HTTP";
-            curl_close($ch);
-            throw new MWSFinancesService_Exception($exProps);
-        }
+        $parsedHeader = $this->parseHttpHeader($header);
 
-        curl_close($ch);
-        return $this->_extractHeadersAndBody($response);
-    }
-    
-    /**
-     * This method will attempt to extract the headers and body of our response.
-     * We need to split the raw response string by 2 'CRLF's.  2 'CRLF's should indicate the separation of the response header
-     * from the response body.  However in our case we have some circumstances (certain client proxies) that result in 
-     * multiple responses concatenated.  We could encounter a response like
-     *
-     * HTTP/1.1 100 Continue
-     *
-     * HTTP/1.1 200 OK
-     * Date: Tue, 01 Apr 2014 13:02:51 GMT
-     * Content-Type: text/html; charset=iso-8859-1
-     * Content-Length: 12605
-     *
-     * ... body ..
-     *
-     * This method will throw away extra response status lines and attempt to find the first full response headers and body
-     *
-     * return [status, body, ResponseHeaderMetadata]
-     */
-    private function _extractHeadersAndBody($response){
-        //First split by 2 'CRLF'
-        $responseComponents = preg_split("/(?:\r?\n){2}/", $response, 2);
-        $body = null;
-        for ($count = 0; 
-                $count < count($responseComponents) && $body == null; 
-                $count++) {
-            
-            $headers = $responseComponents[$count];
-            $responseStatus = $this->_extractHttpStatusCode($headers);
-            
-            if($responseStatus != null && 
-                    $this->_httpHeadersHaveContent($headers)){
-                
-                $responseHeaderMetadata = $this->_extractResponseHeaderMetadata($headers);
-                //The body will be the next item in the responseComponents array
-                $body = $responseComponents[++$count];
+        $responseHeaderMetadata = new MarketplaceWebService_Model_ResponseHeaderMetadata($parsedHeader['x-mws-request-id'],
+            $parsedHeader['x-mws-response-context'], $parsedHeader['x-mws-timestamp']);
+
+        $code = (int)curl_getinfo($this->curlClient, CURLINFO_HTTP_CODE);
+
+        // Only attempt to verify the Content-MD5 value if the request was successful.
+        if (MarketplaceWebService_RequestType::getRequestType($action) === MarketplaceWebService_RequestType::POST_DOWNLOAD) {
+            if ($code != 200) {
+                rewind($this->errorResponseBody);
+                $httpResponse = stream_get_contents($this->errorResponseBody);
+            } else {
+                $this->verifyContentMd5($this->getParsedHeader($parsedHeader, 'Content-MD5'), $dataHandle);
+                $httpResponse = $this->getDownloadResponseDocument($action, $parsedHeader);
             }
         }
-        
-        //If the body is null here then we were unable to parse the response and will throw an exception
-        if($body == null){
-            require_once (dirname(__FILE__) . '/Exception.php');
-            $exProps["Message"] = "Failed to parse valid HTTP response (" . $response . ")";
-            $exProps["ErrorType"] = "HTTP";
-            throw new MWSFinancesService_Exception($exProps);
-        }
+
+        // Cleanup open streams and cURL instance.
+        @fclose($this->headerContents);
+        @fclose($this->errorResponseBody);
+        curl_close($this->curlClient);
+
 
         return array(
-                'Status' => $responseStatus, 
-                'ResponseBody' => $body, 
-                'ResponseHeaderMetadata' => $responseHeaderMetadata);
+            'Status' => $code,
+            'ResponseBody' => $httpResponse,
+            'ResponseHeaderMetadata' => $responseHeaderMetadata
+        );
     }
-    
-    /**
-     * parse the status line of a header string for the proper format and
-     * return the status code
-     *
-     * Example: HTTP/1.1 200 OK
-     * ...
-     * returns String statusCode or null if the status line can't be parsed
-     */
-    private function _extractHttpStatusCode($headers){
-    	$statusCode = null; 
-        if (1 === preg_match("/(\\S+) +(\\d+) +([^\n\r]+)(?:\r?\n|\r)/", $headers, $matches)) {
-        	//The matches array [entireMatchString, protocol, statusCode, the rest]
-            $statusCode = $matches[2]; 
-        }
-        return $statusCode;
-    }
-    
-    /**
-     * Tries to determine some valid headers indicating this response
-     * has content.  In this case
-     * return true if there is a valid "Content-Length" or "Transfer-Encoding" header
-     */
-    private function _httpHeadersHaveContent($headers){
-        return (1 === preg_match("/[cC]ontent-[lL]ength: +(?:\\d+)(?:\\r?\\n|\\r|$)/", $headers) ||
-                1 === preg_match("/Transfer-Encoding: +(?!identity[\r\n;= ])(?:[^\r\n]+)(?:\r?\n|\r|$)/i", $headers));
-    }
-    
-    /**
-    *  extract a ResponseHeaderMetadata object from the raw headers
-    */
-    private function _extractResponseHeaderMetadata($rawHeaders){
-        $inputHeaders = preg_split("/\r\n|\n|\r/", $rawHeaders);
-        $headers = array();
-        $headers['x-mws-request-id'] = null;
-        $headers['x-mws-response-context'] = null;
-        $headers['x-mws-timestamp'] = null;
-        $headers['x-mws-quota-max'] = null;
-        $headers['x-mws-quota-remaining'] = null;
-        $headers['x-mws-quota-resetsOn'] = null;
 
-        foreach ($inputHeaders as $currentHeader) {
-            $keyValue = explode (': ', $currentHeader);
-            if (isset($keyValue[1])) {
-                list ($key, $value) = $keyValue;
-                if (isset($headers[$key]) && $headers[$key]!==null) {
-                    $headers[$key] = $headers[$key] . "," . $value;
+    /**
+     * @param string $parsedHeader
+     * @param string $key
+     * @return string
+     */
+    private function getParsedHeader($parsedHeader, $key)
+    {
+        return $parsedHeader[strtolower($key)];
+    }
+
+    /**
+     * Compares the received Content-MD5 Hash value from the response with a locally calculated
+     * value based on the contents of the response body. If the received hash value doesn't match
+     * the locally calculated hash value, an exception is raised.
+     *
+     * @param string $receivedMd5Hash
+     * @param resource $streamHandle
+     * @throws MarketplaceWebService_Exception
+     */
+    private function verifyContentMd5($receivedMd5Hash, $streamHandle)
+    {
+        rewind($streamHandle);
+        $expectedMd5Hash = $this->getContentMd5($streamHandle);
+        rewind($streamHandle);
+
+        if (!($receivedMd5Hash === $expectedMd5Hash)) {
+            throw new MarketplaceWebService_Exception(array(
+                'Message' => 'Received Content-MD5 = ' . $receivedMd5Hash . ' but expected ' . $expectedMd5Hash,
+                'ErrorCode' => 'ContentMD5DoesNotMatch'
+            ));
+        }
+    }
+
+    /**
+     * Build an associative array of an HTTP Header lines. For requests, the HTTP request line
+     * is not contained in the array, nor is the HTTP status line for response headers.
+     *
+     * @param $header
+     * @return array
+     */
+    private function parseHttpHeader($header)
+    {
+        $parsedHeader = array();
+        foreach (explode("\n", $header) as $line) {
+            $splitLine = preg_split('/:\s/', $line, 2, PREG_SPLIT_NO_EMPTY);
+
+            if (sizeof($splitLine) == 2) {
+                $k = strtolower(trim($splitLine[0]));
+                $v = trim($splitLine[1]);
+                if (array_key_exists($k, $parsedHeader)) {
+                    $parsedHeader[$k] = $parsedHeader[$k] . "," . $v;
                 } else {
-                    $headers[$key] = $value;
+                    $parsedHeader[$k] = $v;
                 }
             }
         }
- 
-        require_once(dirname(__FILE__) . '/Model/ResponseHeaderMetadata.php');
-        return new MWSFinancesService_Model_ResponseHeaderMetadata(
-          $headers['x-mws-request-id'],
-          $headers['x-mws-response-context'],
-          $headers['x-mws-timestamp'],
-          $headers['x-mws-quota-max'],
-          $headers['x-mws-quota-remaining'],
-          $headers['x-mws-quota-resetsOn']);
+
+        return $parsedHeader;
     }
 
     /**
-     * Set curl options relating to SSL. Protected to allow overriding.
-     * @param $ch curl handle
+     * cURL callback to write the response HTTP body into a stream. This is only intended to be used
+     * with MarketplaceWebService_RequestType::POST_DOWNLOAD request types, since the responses can potentially become
+     * large.
+     *
+     * @param $ch - The curl handle.
+     * @param $string - body portion to write.
+     * @return int - number of byes written.
      */
-    protected function setSSLCurlOptions($ch) {
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+    private function responseCallback($ch, $string) {
+        $httpStatusCode = (int) curl_getinfo($this->curlClient, CURLINFO_HTTP_CODE);
+
+        // For unsuccessful responses, i.e. non-200 HTTP responses, we write the response body
+        // into a separate stream.
+        if ($httpStatusCode == 200) {
+            $responseHandle = $this->responseBodyContents;
+        } else {
+            $responseHandle = $this->errorResponseBody;
+        }
+
+        return fwrite($responseHandle, $string);
+    }
+
+    /**
+     * cURL callback to write the response HTTP header into a stream.
+     *
+     * @param $ch - The curl handle.
+     * @param $string - header portion to write.
+     * @return int - number of bytes written to stream.
+     */
+    private function headerCallback($ch, $string) {
+        $bytesWritten = fwrite($this->headerContents, $string);
+        return $bytesWritten;
+    }
+
+    /**
+     * Gets cURL options common to all MWS requests.
+     * @return array
+     */
+    private function getDefaultCurlOptions()
+    {
+        return array(
+            CURLOPT_POST => true,
+            CURLOPT_USERAGENT => $this->config['UserAgent'],
+            CURLOPT_VERBOSE => false,
+            CURLOPT_HEADERFUNCTION => array($this, 'headerCallback'),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_SSL_VERIFYHOST => 2
+        );
+    }
+
+    /**
+     * Configures specific curl options based on the request type.
+     *
+     * @param $action
+     * @param array $converted
+     * @param $streamHandle
+     * @param null $contentMd5
+     * @return array
+     * @throws MarketplaceWebService_Exception
+     * @internal param $parameters
+     */
+    private function configureCurlOptions($action, array $converted, $streamHandle = null, $contentMd5 = null)
+    {
+        $curlOptions = $this->getDefaultCurlOptions();
+
+        if (!is_null($this->config['ProxyHost'])) {
+            $proxy = $this->config['ProxyHost'];
+            $proxy .= ':' . ($this->config['ProxyPort'] == -1 ? '80' : $this->config['ProxyPort']);
+
+            $curlOptions[CURLOPT_PROXY] = $proxy;
+        }
+
+        if (array_key_exists('CURLOPT_VERBOSE', $this->config) && !is_null($this->config['CURLOPT_VERBOSE'])) {
+            $curlOptions[CURLOPT_VERBOSE] = $this->config['CURLOPT_VERBOSE'];
+        }
+
+        $serviceUrl = $this->config['ServiceURL'];
+
+        // append the '/' character to the end of the service URL if it doesn't exist.
+        if (!(substr($serviceUrl, strlen($serviceUrl) - 1) === '/')) {
+            $serviceUrl .= '/';
+        }
+
+        $requestType = MarketplaceWebService_RequestType::getRequestType($action);
+
+        if ($requestType == MarketplaceWebService_RequestType::POST_UPLOAD) {
+
+            if (is_null($streamHandle) || !is_resource($streamHandle)) {
+                throw new MarketplaceWebService_Exception(array('Message' => 'Missing stream resource.'));
+            }
+
+            $serviceUrl .= '?' . $this->getParametersAsString($converted[CONVERTED_PARAMETERS_KEY]);
+
+            $curlOptions[CURLOPT_URL] = $serviceUrl;
+
+            $header[] = 'Expect: ';
+            $header[] = 'Accept: ';
+            $header[] = 'Transfer-Encoding: chunked';
+            $header[] = 'Content-MD5: ' . $contentMd5;
+
+            $curlOptions[CURLOPT_HTTPHEADER] = array_merge($header, $converted[CONVERTED_HEADERS_KEY]);
+
+            rewind($streamHandle);
+            $curlOptions[CURLOPT_INFILE] = $streamHandle;
+
+            $curlOptions[CURLOPT_UPLOAD] = true;
+
+            $curlOptions[CURLOPT_CUSTOMREQUEST] = self::REQUEST_TYPE;
+
+        } else if (!($requestType === MarketplaceWebService_RequestType::UNKNOWN)) {
+            $curlOptions[CURLOPT_URL] = $this->config['ServiceURL'];
+            $curlOptions[CURLOPT_POSTFIELDS] = $this->getParametersAsString($converted[CONVERTED_PARAMETERS_KEY]);
+
+            if ($requestType == MarketplaceWebService_RequestType::POST_DOWNLOAD) {
+                $this->responseBodyContents = $streamHandle;
+                $curlOptions[CURLOPT_WRITEFUNCTION] = array($this, 'responseCallback');
+            }
+        } else {
+            throw new InvalidArgumentException("$action is not a valid request type.");
+        }
+
+        return $curlOptions;
+    }
+
+    /**
+     * For MarketplaceWebService_RequestType::POST_DOWNLOAD actions, construct a response containing the Amazon Request ID
+     * and Content MD5 header value.
+     *
+     * @param string $responseType
+     * @param string $header
+     * @return string
+     */
+    private function getDownloadResponseDocument($responseType, $header)
+    {
+        $md5 = $this->getParsedHeader($header, 'Content-MD5');
+        $requestId = $this->getParsedHeader($header, 'x-amz-request-id');
+
+        $response = '<' . $responseType . 'Response xmlns="http://mws.amazonaws.com/doc/2009-01-01/">';
+
+        $response .= '<' . $responseType . 'Result>';
+        $response .= '<ContentMd5>';
+        $response .= $md5;
+        $response .= '</ContentMd5>';
+        $response .= '</' . $responseType . 'Result>';
+        $response .= '<ResponseMetadata>';
+        $response .= '<RequestId>';
+        $response .= $requestId;
+        $response .= '</RequestId>';
+        $response .= '</ResponseMetadata>';
+        $response .= '</' . $responseType . 'Response>';
+
+        return $response;
     }
 
     /**
      * Exponential sleep on failed request
-     *
-     * @param retries current retry
+     * @param int $retries
+     * @internal param current $retries retry
      */
-    private function _pauseOnRetry($retries)
+    private function pauseOnRetry($retries)
     {
-        if ($retries <= $this->_config['MaxErrorRetry']) {
-            $delay = (int) (pow(4, $retries) * 100000);
-            usleep($delay);
-            return true;
-        } 
-        return false;
+        $delay = (int)(pow(4, $retries) * 100000);
+        usleep($delay);
     }
 
     /**
      * Add authentication related and version parameters
+     * @param array $parameters
+     * @return array
+     * @throws Exception
      */
-    private function _addRequiredParameters(array $parameters)
+    private function addRequiredParameters(array $parameters)
     {
-        $parameters['AWSAccessKeyId'] = $this->_awsAccessKeyId;
-        $parameters['Timestamp'] = $this->_getFormattedTimestamp();
+        $parameters['AWSAccessKeyId'] = $this->awsAccessKeyId;
+        $parameters['Timestamp'] = $this->getFormattedTimestamp(new DateTime('now', new DateTimeZone('UTC')));
         $parameters['Version'] = self::SERVICE_VERSION;
-        $parameters['SignatureVersion'] = $this->_config['SignatureVersion'];
+        $parameters['SignatureVersion'] = $this->config['SignatureVersion'];
         if ($parameters['SignatureVersion'] > 1) {
-            $parameters['SignatureMethod'] = $this->_config['SignatureMethod'];
+            $parameters['SignatureMethod'] = $this->config['SignatureMethod'];
         }
-        $parameters['Signature'] = $this->_signParameters($parameters, $this->_awsSecretAccessKey);
+        if(count($this->config['MarketPlaces'])) {
+            $idIndex = 0;
+            foreach ($this->config['MarketPlaces'] as $id) {
+                $parameters['MarketplaceIdList.Id.' . ($idIndex + 1)] = $id;
+                $idIndex ++;
+            }
+
+        }
+
+        $parameters['Signature'] = $this->signParameters($parameters, $this->awsSecretAccessKey);
 
         return $parameters;
     }
 
     /**
      * Convert paremeters to Url encoded query string
+     * @param array $parameters
+     * @return string
      */
-    private function _getParametersAsString(array $parameters)
+    private function getParametersAsString(array $parameters)
     {
         $queryParameters = array();
         foreach ($parameters as $key => $value) {
-            $queryParameters[] = $key . '=' . $this->_urlencode($value);
+            $queryParameters[] = $key . '=' . $this->urlencode($value);
         }
-        return implode('&', $queryParameters);
+        $a = implode('&', $queryParameters);
+        return $a;
     }
 
 
@@ -771,18 +1200,11 @@ class MWSFinancesService_Client implements MWSFinancesService_Interface
      * Computes RFC 2104-compliant HMAC signature for request parameters
      * Implements AWS Signature, as per following spec:
      *
-     * If Signature Version is 0, it signs concatenated Action and Timestamp
+     * Signature Version 0: This is not supported in the Marketplace Web Service.
      *
-     * If Signature Version is 1, it performs the following:
+     * Signature Version 1: This is not supported in the Marketplace Web Service.
      *
-     * Sorts all  parameters (including SignatureVersion and excluding Signature,
-     * the value of which is being created), ignoring case.
-     *
-     * Iterate over the sorted list and append the parameter name (in original case)
-     * and then its value. It will not URL-encode the parameter values before
-     * constructing this string. There are no separators.
-     *
-     * If Signature Version is 2, string to sign is based on following:
+     * Signature Version is 2, string to sign is based on following:
      *
      *    1. The HTTP Request Method followed by an ASCII newline (%0A)
      *    2. The HTTP Host header in the form of lowercase host, followed by an ASCII newline.
@@ -795,54 +1217,77 @@ class MWSFinancesService_Client implements MWSFinancesService_Interface
      *       Parameter names are separated from their values by the '=' character
      *       (ASCII character 61), even if the value is empty.
      *       Pairs of parameter and values are separated by the '&' character (ASCII code 38).
-     *
+     * @param array $parameters
+     * @param $key
+     * @return string
+     * @throws Exception
      */
-    private function _signParameters(array $parameters, $key) {
+    private function signParameters(array $parameters, $key)
+    {
         $signatureVersion = $parameters['SignatureVersion'];
-        $algorithm = "HmacSHA1";
         $stringToSign = null;
-        if (2 == $signatureVersion) {
-            $algorithm = $this->_config['SignatureMethod'];
+        if (0 === $signatureVersion) {
+            throw new InvalidArgumentException('Signature Version 0 is no longer supported. Only Signature Version 2 is supported.');
+        } else if (1 === $signatureVersion) {
+            throw new InvalidArgumentException('Signature Version 1 is no longer supported. Only Signature Version 2 is supported.');
+        } else if (2 === $signatureVersion) {
+            $algorithm = $this->config['SignatureMethod'];
             $parameters['SignatureMethod'] = $algorithm;
-            $stringToSign = $this->_calculateStringToSignV2($parameters);
+            $stringToSign = $this->calculateStringToSignV2($parameters);
         } else {
             throw new Exception("Invalid Signature Version specified");
         }
-        return $this->_sign($stringToSign, $key, $algorithm);
+        return $this->sign($stringToSign, $key, $algorithm);
     }
 
     /**
      * Calculate String to Sign for SignatureVersion 2
      * @param array $parameters request parameters
+     * @param null $queuepath
      * @return String to Sign
      */
-    private function _calculateStringToSignV2(array $parameters) {
+    private function calculateStringToSignV2(array $parameters, $queuepath = null)
+    {
+
+        $parsedUrl = parse_url($this->config['ServiceURL']);
+        $endpoint = $parsedUrl['host'];
+        if (isset($parsedUrl['port']) && !is_null($parsedUrl['port'])) {
+            $endpoint .= ':' . $parsedUrl['port'];
+        }
+
         $data = 'POST';
         $data .= "\n";
-        $endpoint = parse_url ($this->_config['ServiceURL']);
-        $data .= $endpoint['host'];
+        $data .= $endpoint;
         $data .= "\n";
-        $uri = array_key_exists('path', $endpoint) ? $endpoint['path'] : null;
-        if (!isset ($uri)) {
+        if ($queuepath) {
+            $uri = $queuepath;
+        } else {
             $uri = "/";
         }
-        $uriencoded = implode("/", array_map(array($this, "_urlencode"), explode("/", $uri)));
+        $uriencoded = implode("/", array_map(array($this, "urlencode"), explode("/", $uri)));
         $data .= $uriencoded;
         $data .= "\n";
         uksort($parameters, 'strcmp');
-        $data .= $this->_getParametersAsString($parameters);
+        $data .= $this->getParametersAsString($parameters);
+
         return $data;
     }
 
-    private function _urlencode($value) {
+    private function urlencode($value)
+    {
         return str_replace('%7E', '~', rawurlencode($value));
     }
 
 
     /**
-     * Computes RFC 2104-compliant HMAC signature.
+     * Computes RFC 2104-compliant HMAC signature
+     * @param $data
+     * @param $key
+     * @param $algorithm
+     * @return string
+     * @throws Exception
      */
-    private function _sign($data, $key, $algorithm)
+    private function sign($data, $key, $algorithm)
     {
         if ($algorithm === 'HmacSHA1') {
             $hash = 'sha1';
@@ -851,26 +1296,760 @@ class MWSFinancesService_Client implements MWSFinancesService_Interface
         } else {
             throw new Exception ("Non-supported signing method specified");
         }
-        return base64_encode(
-            hash_hmac($hash, $data, $key, true)
-        );
-    }
-
-
-    /**
-     * Formats date as ISO 8601 timestamp
-     */
-    private function _getFormattedTimestamp()
-    {
-        return gmdate("Y-m-d\TH:i:s.\\0\\0\\0\\Z", time());
+        return base64_encode(hash_hmac($hash, $data, $key, true));
     }
 
     /**
-     * Formats date as ISO 8601 timestamp
+     * Returns a ISO 8601 formatted string from a DateTime instance.
+     * @param DateTime|string $dateTime
+     * @return string
      */
     private function getFormattedTimestamp($dateTime)
     {
+        if(!$dateTime instanceof DateTime) {
+            $dateTime = new DateTime($dateTime);
+        }
+
         return $dateTime->format(DATE_ISO8601);
     }
 
+    /**
+     * Convert GetReportRequest to name value pairs
+     * @param MarketplaceWebService_Model_GetReportRequest $request
+     * @return array
+     */
+    private function convertGetReport($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'GetReport';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetReportId()) {
+            $parameters['ReportId'] = $request->getReportId();
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+
+    /**
+     * Convert GetReportScheduleCountRequest to name value pairs
+     * @param MarketplaceWebService_Model_GetReportScheduleCountRequest $request
+     * @return array
+     */
+    private function convertGetReportScheduleCount($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'GetReportScheduleCount';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetReportTypeList()) {
+            $reportTypeList = $request->getReportTypeList();
+            foreach ($reportTypeList->getType() as $typeIndex => $type) {
+                $parameters['ReportTypeList' . '.' . 'Type' . '.' . ($typeIndex + 1)] = $type;
+            }
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+
+    /**
+     * Convert GetReportRequestListByNextTokenRequest to name value pairs
+     * @param MarketplaceWebService_Model_GetReportRequestListByNextTokenRequest $request
+     * @return array
+     */
+    private function convertGetReportRequestListByNextToken($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'GetReportRequestListByNextToken';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetNextToken()) {
+            $parameters['NextToken'] = $request->getNextToken();
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+    /**
+     * Convert UpdateReportAcknowledgementsRequest to name value pairs
+     * @param MarketplaceWebService_Model_UpdateReportAcknowledgementsRequest $request
+     * @return array
+     */
+    private function convertUpdateReportAcknowledgements($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'UpdateReportAcknowledgements';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetReportIdList()) {
+            $reportIdList = $request->getReportIdList();
+            foreach ($reportIdList->getId() as $idIndex => $id) {
+                $parameters['ReportIdList' . '.' . 'Id' . '.' . ($idIndex + 1)] = $id;
+            }
+        }
+        if ($request->isSetAcknowledged()) {
+            $parameters['Acknowledged'] = $request->getAcknowledged() ? "true" : "false";
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+
+    /**
+     * Convert SubmitFeedRequest to name value pairs
+     * @param MarketplaceWebService_Model_SubmitFeedRequest $request
+     * @return array
+     */
+    private function convertSubmitFeed($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'SubmitFeed';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetMarketplaceIdList()) {
+
+            $marketplaceIdList = $request->getMarketplaceIdList();
+            foreach ($marketplaceIdList->getId() as $idIndex => $id) {
+                $parameters['MarketplaceIdList.Id.' . ($idIndex + 1)] = $id;
+            }
+        }
+        if ($request->isSetFeedType()) {
+            $parameters['FeedType'] = $request->getFeedType();
+        }
+        if ($request->isSetPurgeAndReplace()) {
+            $parameters['PurgeAndReplace'] = $request->getPurgeAndReplace() ? "true" : "false";
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        $headers = array();
+        array_push($headers, "Content-Type: " . $request->getContentType()->toString());
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $headers);
+    }
+
+
+    /**
+     * Convert GetReportCountRequest to name value pairs
+     * @param MarketplaceWebService_Model_GetReportCountRequest $request
+     * @return array
+     */
+    private function convertGetReportCount($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'GetReportCount';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetReportTypeList()) {
+            $reportTypeList = $request->getReportTypeList();
+            foreach ($reportTypeList->getType() as $typeIndex => $type) {
+                $parameters['ReportTypeList' . '.' . 'Type' . '.' . ($typeIndex + 1)] = $type;
+            }
+        }
+        if ($request->isSetAcknowledged()) {
+            $parameters['Acknowledged'] = $request->getAcknowledged() ? "true" : "false";
+        }
+        if ($request->isSetAvailableFromDate()) {
+            $parameters['AvailableFromDate'] = $this->getFormattedTimestamp($request->getAvailableFromDate());
+        }
+        if ($request->isSetAvailableToDate()) {
+            $parameters['AvailableToDate'] = $this->getFormattedTimestamp($request->getAvailableToDate());
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+
+    /**
+     * Convert GetFeedSubmissionListByNextTokenRequest to name value pairs
+     * @param MarketplaceWebService_Model_GetFeedSubmissionListByNextTokenRequest $request
+     * @return array
+     */
+    private function convertGetFeedSubmissionListByNextToken($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'GetFeedSubmissionListByNextToken';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetNextToken()) {
+            $parameters['NextToken'] = $request->getNextToken();
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+
+    /**
+     * Convert CancelFeedSubmissionsRequest to name value pairs
+     * @param MarketplaceWebService_Model_CancelFeedSubmissionsRequest $request
+     * @return array
+     */
+    private function convertCancelFeedSubmissions($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'CancelFeedSubmissions';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetFeedSubmissionIdList()) {
+            $feedSubmissionIdList = $request->getFeedSubmissionIdList();
+            foreach ($feedSubmissionIdList->getId() as $idIndex => $id) {
+                $parameters['FeedSubmissionIdList' . '.' . 'Id' . '.' . ($idIndex + 1)] = $id;
+            }
+        }
+        if ($request->isSetFeedTypeList()) {
+            $feedTypeList = $request->getFeedTypeList();
+            foreach ($feedTypeList->getType() as $typeIndex => $type) {
+                $parameters['FeedTypeList' . '.' . 'Type' . '.' . ($typeIndex + 1)] = $type;
+            }
+        }
+        if ($request->isSetSubmittedFromDate()) {
+            $parameters['SubmittedFromDate'] = $this->getFormattedTimestamp($request->getSubmittedFromDate());
+        }
+        if ($request->isSetSubmittedToDate()) {
+            $parameters['SubmittedToDate'] = $this->getFormattedTimestamp($request->getSubmittedToDate());
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+
+    /**
+     * Convert RequestReportRequest to name value pairs
+     * @param MarketplaceWebService_Model_RequestReportRequest $request
+     * @return array
+     */
+    private function convertRequestReport($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'RequestReport';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetMarketplaceIdList()) {
+            $marketplaceIdList = $request->getMarketplaceIdList();
+            foreach ($marketplaceIdList->getId() as $idIndex => $id) {
+                $parameters['MarketplaceIdList.Id.' . ($idIndex + 1)] = $id;
+            }
+        }
+        if ($request->isSetReportType()) {
+            $parameters['ReportType'] = $request->getReportType();
+        }
+        if ($request->isSetStartDate()) {
+            $parameters['StartDate'] = $this->getFormattedTimestamp($request->getStartDate());
+        }
+        if ($request->isSetEndDate()) {
+            $parameters['EndDate'] = $this->getFormattedTimestamp($request->getEndDate());
+        }
+        if ($request->isSetReportOptions()) {
+            $parameters['ReportOptions'] = $request->getReportOptions();
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+
+    /**
+     * Convert GetFeedSubmissionCountRequest to name value pairs
+     * @param MarketplaceWebService_Model_GetFeedSubmissionCountRequest $request
+     * @return array
+     */
+    private function convertGetFeedSubmissionCount($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'GetFeedSubmissionCount';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetFeedTypeList()) {
+            $feedTypeList = $request->getFeedTypeList();
+            foreach ($feedTypeList->getType() as $typeIndex => $type) {
+                $parameters['FeedTypeList' . '.' . 'Type' . '.' . ($typeIndex + 1)] = $type;
+            }
+        }
+        if ($request->isSetFeedProcessingStatusList()) {
+            $feedProcessingStatusList = $request->getFeedProcessingStatusList();
+            foreach ($feedProcessingStatusList->getStatus() as $statusIndex => $status) {
+                $parameters['FeedProcessingStatusList' . '.' . 'Status' . '.' . ($statusIndex + 1)] = $status;
+            }
+        }
+        if ($request->isSetSubmittedFromDate()) {
+            $parameters['SubmittedFromDate'] = $this->getFormattedTimestamp($request->getSubmittedFromDate());
+        }
+        if ($request->isSetSubmittedToDate()) {
+            $parameters['SubmittedToDate'] = $this->getFormattedTimestamp($request->getSubmittedToDate());
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+
+    /**
+     * Convert CancelReportRequestsRequest to name value pairs
+     * @param MarketplaceWebService_Model_CancelReportRequestsRequest $request
+     * @return array
+     */
+    private function convertCancelReportRequests($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'CancelReportRequests';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetReportRequestIdList()) {
+            $reportRequestIdList = $request->getReportRequestIdList();
+            foreach ($reportRequestIdList->getId() as $idIndex => $id) {
+                $parameters['ReportRequestIdList' . '.' . 'Id' . '.' . ($idIndex + 1)] = $id;
+            }
+        }
+        if ($request->isSetReportTypeList()) {
+            $reportTypeList = $request->getReportTypeList();
+            foreach ($reportTypeList->getType() as $typeIndex => $type) {
+                $parameters['ReportTypeList' . '.' . 'Type' . '.' . ($typeIndex + 1)] = $type;
+            }
+        }
+        if ($request->isSetReportProcessingStatusList()) {
+            $reportProcessingStatusList = $request->getReportProcessingStatusList();
+            foreach ($reportProcessingStatusList->getStatus() as $statusIndex => $status) {
+                $parameters['ReportProcessingStatusList' . '.' . 'Status' . '.' . ($statusIndex + 1)] = $status;
+            }
+        }
+        if ($request->isSetRequestedFromDate()) {
+            $parameters['RequestedFromDate'] = $this->getFormattedTimestamp($request->getRequestedFromDate());
+        }
+        if ($request->isSetRequestedToDate()) {
+            $parameters['RequestedToDate'] = $this->getFormattedTimestamp($request->getRequestedToDate());
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+
+    /**
+     * Convert GetReportListRequest to name value pairs
+     * @param MarketplaceWebService_Model_GetReportListRequest $request
+     * @return array
+     */
+    private function convertGetReportList($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'GetReportList';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetMaxCount()) {
+            $parameters['MaxCount'] = $request->getMaxCount();
+        }
+        if ($request->isSetMarketplaceIdList()) {
+            $marketplaceIdList = $request->getMarketplaceIdList();
+            foreach ($marketplaceIdList->getId() as $idIndex => $id) {
+                $parameters['MarketplaceIdList.Id.' . ($idIndex + 1)] = $id;
+            }
+        }
+
+        if ($request->isSetReportTypeList()) {
+            $reportTypeList = $request->getReportTypeList();
+            foreach ($reportTypeList->getType() as $typeIndex => $type) {
+                $parameters['ReportTypeList' . '.' . 'Type' . '.' . ($typeIndex + 1)] = $type;
+            }
+        }
+        if ($request->isSetAcknowledged()) {
+            $parameters['Acknowledged'] = $request->getAcknowledged() ? "true" : "false";
+        }
+        if ($request->isSetAvailableFromDate()) {
+            $parameters['AvailableFromDate'] = $this->getFormattedTimestamp($request->getAvailableFromDate());
+        }
+        if ($request->isSetAvailableToDate()) {
+            $parameters['AvailableToDate'] = $this->getFormattedTimestamp($request->getAvailableToDate());
+        }
+        if ($request->isSetReportRequestIdList()) {
+            $reportRequestIdList = $request->getReportRequestIdList();
+            foreach ($reportRequestIdList->getId() as $idIndex => $id) {
+                $parameters['ReportRequestIdList' . '.' . 'Id' . '.' . ($idIndex + 1)] = $id;
+            }
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+        
+
+        $result =  array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+        return $result;
+    }
+
+
+    /**
+     * Convert GetFeedSubmissionResultRequest to name value pairs
+     * @param MarketplaceWebService_Model_GetFeedSubmissionResultRequest $request
+     * @return array
+     */
+    private function convertGetFeedSubmissionResult($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'GetFeedSubmissionResult';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetFeedSubmissionId()) {
+            $parameters['FeedSubmissionId'] = $request->getFeedSubmissionId();
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+
+    /**
+     * Convert GetFeedSubmissionListRequest to name value pairs
+     * @param MarketplaceWebService_Model_GetFeedSubmissionListRequest $request
+     * @return array
+     */
+    private function convertGetFeedSubmissionList($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'GetFeedSubmissionList';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetFeedSubmissionIdList()) {
+            $feedSubmissionIdList = $request->getFeedSubmissionIdList();
+            foreach ($feedSubmissionIdList->getId() as $idIndex => $id) {
+                $parameters['FeedSubmissionIdList' . '.' . 'Id' . '.' . ($idIndex + 1)] = $id;
+            }
+        }
+        if ($request->isSetMaxCount()) {
+            $parameters['MaxCount'] = $request->getMaxCount();
+        }
+        if ($request->isSetFeedTypeList()) {
+            $feedTypeList = $request->getFeedTypeList();
+            foreach ($feedTypeList->getType() as $typeIndex => $type) {
+                $parameters['FeedTypeList' . '.' . 'Type' . '.' . ($typeIndex + 1)] = $type;
+            }
+        }
+        if ($request->isSetFeedProcessingStatusList()) {
+            $feedProcessingStatusList = $request->getFeedProcessingStatusList();
+            foreach ($feedProcessingStatusList->getStatus() as $statusIndex => $status) {
+                $parameters['FeedProcessingStatusList' . '.' . 'Status' . '.' . ($statusIndex + 1)] = $status;
+            }
+        }
+        if ($request->isSetSubmittedFromDate()) {
+            $parameters['SubmittedFromDate'] = $this->getFormattedTimestamp($request->getSubmittedFromDate());
+        }
+        if ($request->isSetSubmittedToDate()) {
+            $parameters['SubmittedToDate'] = $this->getFormattedTimestamp($request->getSubmittedToDate());
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+
+    /**
+     * Convert GetReportRequestListRequest to name value pairs
+     * @param MarketplaceWebService_Model_GetReportRequestListRequest $request
+     * @return array
+     */
+    private function convertGetReportRequestList($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'GetReportRequestList';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetReportRequestIdList()) {
+            $reportRequestIdList = $request->getReportRequestIdList();
+            foreach ($reportRequestIdList->getId() as $idIndex => $id) {
+                $parameters['ReportRequestIdList' . '.' . 'Id' . '.' . ($idIndex + 1)] = $id;
+            }
+        }
+        if ($request->isSetReportTypeList()) {
+            $reportTypeList = $request->getReportTypeList();
+            foreach ($reportTypeList->getType() as $typeIndex => $type) {
+                $parameters['ReportTypeList' . '.' . 'Type' . '.' . ($typeIndex + 1)] = $type;
+            }
+        }
+        if ($request->isSetReportProcessingStatusList()) {
+            $reportProcessingStatusList = $request->getReportProcessingStatusList();
+            foreach ($reportProcessingStatusList->getStatus() as $statusIndex => $status) {
+                $parameters['ReportProcessingStatusList' . '.' . 'Status' . '.' . ($statusIndex + 1)] = $status;
+            }
+        }
+        if ($request->isSetMaxCount()) {
+            $parameters['MaxCount'] = $request->getMaxCount();
+        }
+        if ($request->isSetRequestedFromDate()) {
+            $parameters['RequestedFromDate'] = $this->getFormattedTimestamp($request->getRequestedFromDate());
+        }
+        if ($request->isSetRequestedToDate()) {
+            $parameters['RequestedToDate'] = $this->getFormattedTimestamp($request->getRequestedToDate());
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+
+    /**
+     * Convert GetReportScheduleListByNextTokenRequest to name value pairs
+     * @param MarketplaceWebService_Model_GetReportScheduleListByNextTokenRequest $request
+     * @return array
+     */
+    private function convertGetReportScheduleListByNextToken($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'GetReportScheduleListByNextToken';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetNextToken()) {
+            $parameters['NextToken'] = $request->getNextToken();
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+
+    /**
+     * Convert GetReportListByNextTokenRequest to name value pairs
+     * @param MarketplaceWebService_Model_GetReportListByNextTokenRequest $request
+     * @return array
+     */
+    private function convertGetReportListByNextToken($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'GetReportListByNextToken';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetNextToken()) {
+            $parameters['NextToken'] = $request->getNextToken();
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+
+    /**
+     * Convert ManageReportScheduleRequest to name value pairs
+     * @param MarketplaceWebService_Model_ManageReportScheduleRequest $request
+     * @return array
+     */
+    private function convertManageReportSchedule($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'ManageReportSchedule';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetReportType()) {
+            $parameters['ReportType'] = $request->getReportType();
+        }
+        if ($request->isSetSchedule()) {
+            $parameters['Schedule'] = $request->getSchedule();
+        }
+        if ($request->isSetScheduleDate()) {
+            $parameters['ScheduleDate'] = $this->getFormattedTimestamp($request->getScheduleDate());
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+
+    /**
+     * Convert GetReportRequestCountRequest to name value pairs
+     * @param MarketplaceWebService_Model_GetReportRequestCountRequest $request
+     * @return array
+     */
+    private function convertGetReportRequestCount($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'GetReportRequestCount';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetReportTypeList()) {
+            $reportTypeList = $request->getReportTypeList();
+            foreach ($reportTypeList->getType() as $typeIndex => $type) {
+                $parameters['ReportTypeList' . '.' . 'Type' . '.' . ($typeIndex + 1)] = $type;
+            }
+        }
+        if ($request->isSetReportProcessingStatusList()) {
+            $reportProcessingStatusList = $request->getReportProcessingStatusList();
+            foreach ($reportProcessingStatusList->getStatus() as $statusIndex => $status) {
+                $parameters['ReportProcessingStatusList' . '.' . 'Status' . '.' . ($statusIndex + 1)] = $status;
+            }
+        }
+        if ($request->isSetRequestedFromDate()) {
+            $parameters['RequestedFromDate'] = $this->getFormattedTimestamp($request->getRequestedFromDate());
+        }
+        if ($request->isSetRequestedToDate()) {
+            $parameters['RequestedToDate'] = $this->getFormattedTimestamp($request->getRequestedToDate());
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
+
+
+    /**
+     * Convert GetReportScheduleListRequest to name value pairs
+     * @param MarketplaceWebService_Model_GetReportScheduleListRequest $request
+     * @return array
+     */
+    private function convertGetReportScheduleList($request)
+    {
+
+        $parameters = array();
+        $parameters['Action'] = 'GetReportScheduleList';
+        if ($request->isSetMarketplace()) {
+            $parameters['Marketplace'] = $request->getMarketplace();
+        }
+        if ($request->isSetMerchant()) {
+            $parameters['Merchant'] = $request->getMerchant();
+        }
+        if ($request->isSetReportTypeList()) {
+            $reportTypeList = $request->getReportTypeList();
+            foreach ($reportTypeList->getType() as $typeIndex => $type) {
+                $parameters['ReportTypeList' . '.' . 'Type' . '.' . ($typeIndex + 1)] = $type;
+            }
+        }
+        if ($request->isSetMWSAuthToken()) {
+            $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
+        }
+
+        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+    }
 }

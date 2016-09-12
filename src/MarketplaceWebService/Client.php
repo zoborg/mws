@@ -1176,7 +1176,7 @@ class MarketplaceWebService_Client implements MarketplaceWebService_Interface
         }
 
         $parameters['Signature'] = $this->signParameters($parameters, $this->awsSecretAccessKey);
-        var_export($parameters);
+
 
         return $parameters;
     }
@@ -1760,7 +1760,6 @@ class MarketplaceWebService_Client implements MarketplaceWebService_Interface
         if ($request->isSetMWSAuthToken()) {
             $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
         }
-        var_export($request);
 
         $result =  array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
         return $result;
