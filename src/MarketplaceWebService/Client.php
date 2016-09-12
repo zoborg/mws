@@ -45,6 +45,7 @@ class MarketplaceWebService_Client implements MarketplaceWebService_Interface
         'MaxErrorRetry' => 3,
         'Headers' => array(),
         'SSL_VerifyPeer' => true,
+        'MarketPlaces' => [],
         'SSL_VerifyHost' => 2,
     );
 
@@ -1165,7 +1166,17 @@ class MarketplaceWebService_Client implements MarketplaceWebService_Interface
         if ($parameters['SignatureVersion'] > 1) {
             $parameters['SignatureMethod'] = $this->config['SignatureMethod'];
         }
+        if(count($this->config['MarketPlaces'])) {
+            $idIndex = 0;
+            foreach ($this->config['MarketPlaces'] as $id) {
+                $parameters['MarketplaceIdList.Id.' . ($idIndex + 1)] = $id;
+                $idIndex ++;
+            }
+
+        }
+
         $parameters['Signature'] = $this->signParameters($parameters, $this->awsSecretAccessKey);
+        var_export($parameters);
 
         return $parameters;
     }
@@ -1181,7 +1192,8 @@ class MarketplaceWebService_Client implements MarketplaceWebService_Interface
         foreach ($parameters as $key => $value) {
             $queryParameters[] = $key . '=' . $this->urlencode($value);
         }
-        return implode('&', $queryParameters);
+        $a = implode('&', $queryParameters);
+        return $a;
     }
 
 
@@ -1298,6 +1310,7 @@ class MarketplaceWebService_Client implements MarketplaceWebService_Interface
         if(!$dateTime instanceof DateTime) {
             $dateTime = new DateTime($dateTime);
         }
+
         return $dateTime->format(DATE_ISO8601);
     }
 
@@ -1434,6 +1447,7 @@ class MarketplaceWebService_Client implements MarketplaceWebService_Interface
             $parameters['Merchant'] = $request->getMerchant();
         }
         if ($request->isSetMarketplaceIdList()) {
+
             $marketplaceIdList = $request->getMarketplaceIdList();
             foreach ($marketplaceIdList->getId() as $idIndex => $id) {
                 $parameters['MarketplaceIdList.Id.' . ($idIndex + 1)] = $id;
@@ -1715,6 +1729,13 @@ class MarketplaceWebService_Client implements MarketplaceWebService_Interface
         if ($request->isSetMaxCount()) {
             $parameters['MaxCount'] = $request->getMaxCount();
         }
+        if ($request->isSetMarketplaceIdList()) {
+            $marketplaceIdList = $request->getMarketplaceIdList();
+            foreach ($marketplaceIdList->getId() as $idIndex => $id) {
+                $parameters['MarketplaceIdList.Id.' . ($idIndex + 1)] = $id;
+            }
+        }
+
         if ($request->isSetReportTypeList()) {
             $reportTypeList = $request->getReportTypeList();
             foreach ($reportTypeList->getType() as $typeIndex => $type) {
@@ -1739,8 +1760,10 @@ class MarketplaceWebService_Client implements MarketplaceWebService_Interface
         if ($request->isSetMWSAuthToken()) {
             $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
         }
+        var_export($request);
 
-        return array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+        $result =  array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
+        return $result;
     }
 
 

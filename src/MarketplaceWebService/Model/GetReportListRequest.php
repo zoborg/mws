@@ -59,6 +59,7 @@ class MarketplaceWebService_Model_GetReportListRequest extends MarketplaceWebSer
     {
         $this->fields = array(
             'Marketplace' => array('FieldValue' => null, 'FieldType' => 'string'),
+            'MarketplaceIdList' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebService_Model_IdList'),
             'Merchant' => array('FieldValue' => null, 'FieldType' => 'string'),
             'MWSAuthToken' => array('FieldValue' => null, 'FieldType' => 'string'),
             'MaxCount' => array('FieldValue' => null, 'FieldType' => 'string'),
@@ -69,6 +70,52 @@ class MarketplaceWebService_Model_GetReportListRequest extends MarketplaceWebSer
             'ReportRequestIdList' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebService_Model_IdList'),
         );
         parent::__construct($data);
+    }
+
+    /**
+     * Checks if MarketplaceIdList  is set
+     *
+     * @return bool true if MarketplaceIdList property is set
+     */
+    public function isSetMarketplaceIdList()
+    {
+        return !is_null($this->fields['MarketplaceIdList']['FieldValue']);
+
+    }
+    /**
+     * Gets the value of the MarketplaceIdList.
+     *
+     * @return MarketplaceWebService_Model_IdList MarketplaceIdList
+     */
+    public function getMarketplaceIdList()
+    {
+        return $this->fields['MarketplaceIdList']['FieldValue'];
+    }
+
+    /**
+     * Sets the value of the MarketplaceIdList.
+     *
+     * @param MarketplaceWebService_Model_IdList $value MarketplaceIdList
+     * @return void
+     */
+    public function setMarketplaceIdList($value)
+    {
+        $marketplaceIdList = new MarketplaceWebService_Model_IdList();
+        $marketplaceIdList->setId($value['Id']);
+        $this->fields['MarketplaceIdList']['FieldValue'] = $marketplaceIdList;
+        return;
+    }
+
+    /**
+     * Sets the value of the MarketplaceIdList  and returns this instance
+     *
+     * @param MarketplaceWebService_Model_IdList $value MarketplaceIdList
+     * @return MarketplaceWebService_Model_SubmitFeedRequest instance
+     */
+    public function withMarketplaceIdList($value)
+    {
+        $this->setMarketplaceIdList($value);
+        return $this;
     }
 
     /**

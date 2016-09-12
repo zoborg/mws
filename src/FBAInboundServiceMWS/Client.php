@@ -824,6 +824,7 @@ class FBAInboundServiceMWS_Client implements FBAInboundServiceMWS_Interface
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $scheme . $url['host'] . $uri);
         curl_setopt($ch, CURLOPT_PORT, $port);
+        curl_setopt($ch, CURLOPT_VERBOSE, true);
         $this->setSSLCurlOptions($ch);
         curl_setopt($ch, CURLOPT_USERAGENT, $this->_config['UserAgent']);
         curl_setopt($ch, CURLOPT_POST, true);

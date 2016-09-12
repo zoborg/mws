@@ -95,7 +95,7 @@ $service = new MarketplaceWebService_Client(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS
 // );
 // $request = new MarketplaceWebService_Model_GetReportRequest($parameters);
 
-//$request = new MarketplaceWebService_Model_GetReportRequest();
+$request = new MarketplaceWebService_Model_GetReportRequest();
 //$request->setMerchant(MERCHANT_ID);
 //$request->setReport(@fopen('php://memory', 'rw+'));
 //$request->setReportId($reportId);

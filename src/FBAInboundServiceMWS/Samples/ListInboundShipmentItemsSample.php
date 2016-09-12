@@ -70,6 +70,7 @@ $service = new FBAInboundServiceMWS_Client(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_
 // @TODO: set request. Action can be passed as FBAInboundServiceMWS_Model_ListInboundShipmentItems
 $request = new FBAInboundServiceMWS_Model_ListInboundShipmentItemsRequest();
 $request->setSellerId(MERCHANT_ID);
+
 // object or array of parameters
 invokeListInboundShipmentItems($service, $request);
 
