@@ -1,28 +1,35 @@
 <?php
 /*******************************************************************************
- * Copyright 2009-2014 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright 2009-2016 Amazon Services. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
  *
- * You may not use this file except in compliance with the License.
+ * You may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
  * specific language governing permissions and limitations under the License.
  *******************************************************************************
  * PHP Version 5
  * @category Amazon
  * @package  Marketplace Web Service Products
  * @version  2011-10-01
- * Library Version: 2014-10-20
- * Generated: Fri Oct 17 17:59:56 GMT 2014
+ * Library Version: 2016-06-01
+ * Generated: Fri Sep 16 11:49:32 PDT 2016
  */
 
 /**
+ *  @see MarketplaceWebServiceProducts_Model
+ */
+
+require_once (dirname(__FILE__) . '/../Model.php');
+
+
+/**
  * MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest
- *
+ * 
  * Properties:
  * <ul>
- *
+ * 
  * <li>SellerId: string</li>
  * <li>MWSAuthToken: string</li>
  * <li>MarketplaceId: string</li>
@@ -30,21 +37,18 @@
  *
  * </ul>
  */
-class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest extends MarketplaceWebServiceProducts_Model
-{
+
+ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest extends MarketplaceWebServiceProducts_Model {
 
     public function __construct($data = null)
     {
-        $this->_fields = array(
-            'SellerId' => array('FieldValue' => null, 'FieldType' => 'string'),
-            'MWSAuthToken' => array('FieldValue' => null, 'FieldType' => 'string'),
-            'MarketplaceId' => array('FieldValue' => null, 'FieldType' => 'string'),
-            'SellerSKUList' => array(
-                'FieldValue' => null,
-                'FieldType' => 'MarketplaceWebServiceProducts_Model_SellerSKUListType'
-            ),
-        );
-        parent::__construct($data);
+    $this->_fields = array (
+    'SellerId' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'MWSAuthToken' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'MarketplaceId' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'SellerSKUList' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_SellerSKUListType'),
+    );
+    parent::__construct($data);
     }
 
     /**
@@ -60,8 +64,8 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest ext
     /**
      * Set the value of the SellerId property.
      *
-     * @param string $value sellerId
-     * @return $this This instance
+     * @param string sellerId
+     * @return this instance
      */
     public function setSellerId($value)
     {
@@ -76,8 +80,8 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest ext
      */
     public function isSetSellerId()
     {
-        return !is_null($this->_fields['SellerId']['FieldValue']);
-    }
+                return !is_null($this->_fields['SellerId']['FieldValue']);
+            }
 
     /**
      * Set the value of SellerId, return this.
@@ -85,7 +89,7 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest ext
      * @param sellerId
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withSellerId($value)
     {
@@ -106,8 +110,8 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest ext
     /**
      * Set the value of the MWSAuthToken property.
      *
-     * @param string $value mwsAuthToken
-     * @return $this This instance
+     * @param string mwsAuthToken
+     * @return this instance
      */
     public function setMWSAuthToken($value)
     {
@@ -122,8 +126,8 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest ext
      */
     public function isSetMWSAuthToken()
     {
-        return !is_null($this->_fields['MWSAuthToken']['FieldValue']);
-    }
+                return !is_null($this->_fields['MWSAuthToken']['FieldValue']);
+            }
 
     /**
      * Set the value of MWSAuthToken, return this.
@@ -131,7 +135,7 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest ext
      * @param mwsAuthToken
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withMWSAuthToken($value)
     {
@@ -152,8 +156,8 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest ext
     /**
      * Set the value of the MarketplaceId property.
      *
-     * @param string $value marketplaceId
-     * @return $this This instance
+     * @param string marketplaceId
+     * @return this instance
      */
     public function setMarketplaceId($value)
     {
@@ -168,8 +172,8 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest ext
      */
     public function isSetMarketplaceId()
     {
-        return !is_null($this->_fields['MarketplaceId']['FieldValue']);
-    }
+                return !is_null($this->_fields['MarketplaceId']['FieldValue']);
+            }
 
     /**
      * Set the value of MarketplaceId, return this.
@@ -177,7 +181,7 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest ext
      * @param marketplaceId
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withMarketplaceId($value)
     {
@@ -188,7 +192,7 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest ext
     /**
      * Get the value of the SellerSKUList property.
      *
-     * @return MarketplaceWebServiceProducts_Model_SellerSKUListType SellerSKUList.
+     * @return SellerSKUListType SellerSKUList.
      */
     public function getSellerSKUList()
     {
@@ -198,8 +202,8 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest ext
     /**
      * Set the value of the SellerSKUList property.
      *
-     * @param MarketplaceWebServiceProducts_Model_SellerSKUListType $value sellerSKUList
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_SellerSKUListType sellerSKUList
+     * @return this instance
      */
     public function setSellerSKUList($value)
     {
@@ -214,8 +218,8 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest ext
      */
     public function isSetSellerSKUList()
     {
-        return !is_null($this->_fields['SellerSKUList']['FieldValue']);
-    }
+                return !is_null($this->_fields['SellerSKUList']['FieldValue']);
+            }
 
     /**
      * Set the value of SellerSKUList, return this.
@@ -223,7 +227,7 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForSKURequest ext
      * @param sellerSKUList
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withSellerSKUList($value)
     {

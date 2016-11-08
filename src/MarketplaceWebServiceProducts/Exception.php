@@ -1,20 +1,20 @@
 <?php
 /*******************************************************************************
- * Copyright 2009-2014 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright 2009-2016 Amazon Services. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
  *
- * You may not use this file except in compliance with the License.
+ * You may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
  * specific language governing permissions and limitations under the License.
  *******************************************************************************
  * PHP Version 5
  * @category Amazon
  * @package  Marketplace Web Service Products
  * @version  2011-10-01
- * Library Version: 2014-10-20
- * Generated: Fri Oct 17 17:59:56 GMT 2014
+ * Library Version: 2016-06-01
+ * Generated: Fri Sep 16 11:49:32 PDT 2016
  */
 
 
@@ -67,7 +67,7 @@ class MarketplaceWebServiceProducts_Exception extends Exception
                 $this->_errorCode = $exception->getErrorCode();
                 $this->_errorType = $exception->getErrorType();
                 $this->_requestId = $exception->getRequestId();
-                $this->_xml = $exception->getXML();
+                $this->_xml= $exception->getXML();
                 $this->_responseHeaderMetadata = $exception->getResponseHeaderMetadata();
             }
         } else {
@@ -80,9 +80,8 @@ class MarketplaceWebServiceProducts_Exception extends Exception
         }
     }
 
-    private function arr_val($arr, $key)
-    {
-        if (array_key_exists($key, $arr)) {
+    private function arr_val($arr, $key) {
+        if(array_key_exists($key, $arr)) {
             return $arr[$key];
         } else {
             return null;
@@ -94,8 +93,7 @@ class MarketplaceWebServiceProducts_Exception extends Exception
      *
      * @return string Error Code returned by the service
      */
-    public function getErrorCode()
-    {
+    public function getErrorCode(){
         return $this->_errorCode;
     }
 
@@ -105,8 +103,7 @@ class MarketplaceWebServiceProducts_Exception extends Exception
      * @return string Error Type returned by the service.
      * Possible types:  Sender, Receiver or Unknown
      */
-    public function getErrorType()
-    {
+    public function getErrorType(){
         return $this->_errorType;
     }
 
@@ -115,8 +112,7 @@ class MarketplaceWebServiceProducts_Exception extends Exception
      *
      * @return string Error message
      */
-    public function getErrorMessage()
-    {
+    public function getErrorMessage() {
         return $this->_message;
     }
 
@@ -127,8 +123,7 @@ class MarketplaceWebServiceProducts_Exception extends Exception
      *
      * @return int status code returned by the service
      */
-    public function getStatusCode()
-    {
+    public function getStatusCode() {
         return $this->_statusCode;
     }
 
@@ -137,8 +132,7 @@ class MarketplaceWebServiceProducts_Exception extends Exception
      *
      * @return string XML returned by the service
      */
-    public function getXML()
-    {
+    public function getXML() {
         return $this->_xml;
     }
 
@@ -147,13 +141,11 @@ class MarketplaceWebServiceProducts_Exception extends Exception
      *
      * @return string Request ID returned by the service
      */
-    public function getRequestId()
-    {
+    public function getRequestId() {
         return $this->_requestId;
     }
 
-    public function getResponseHeaderMetadata()
-    {
-        return $this->_responseHeaderMetadata;
+    public function getResponseHeaderMetadata() {
+      return $this->_responseHeaderMetadata;
     }
 }

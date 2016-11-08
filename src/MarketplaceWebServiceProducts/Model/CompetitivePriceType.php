@@ -1,28 +1,35 @@
 <?php
 /*******************************************************************************
- * Copyright 2009-2014 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright 2009-2016 Amazon Services. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
  *
- * You may not use this file except in compliance with the License.
+ * You may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
  * specific language governing permissions and limitations under the License.
  *******************************************************************************
  * PHP Version 5
  * @category Amazon
  * @package  Marketplace Web Service Products
  * @version  2011-10-01
- * Library Version: 2014-10-20
- * Generated: Fri Oct 17 17:59:56 GMT 2014
+ * Library Version: 2016-06-01
+ * Generated: Fri Sep 16 11:49:32 PDT 2016
  */
 
 /**
+ *  @see MarketplaceWebServiceProducts_Model
+ */
+
+require_once (dirname(__FILE__) . '/../Model.php');
+
+
+/**
  * MarketplaceWebServiceProducts_Model_CompetitivePriceType
- *
+ * 
  * Properties:
  * <ul>
- *
+ * 
  * <li>CompetitivePriceId: string</li>
  * <li>Price: MarketplaceWebServiceProducts_Model_PriceType</li>
  * <li>condition: string</li>
@@ -31,19 +38,19 @@
  *
  * </ul>
  */
-class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends MarketplaceWebServiceProducts_Model
-{
+
+ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends MarketplaceWebServiceProducts_Model {
 
     public function __construct($data = null)
     {
-        $this->_fields = array(
-            'CompetitivePriceId' => array('FieldValue' => null, 'FieldType' => 'string'),
-            'Price' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_PriceType'),
-            'condition' => array('FieldValue' => null, 'FieldType' => '@string'),
-            'subcondition' => array('FieldValue' => null, 'FieldType' => '@string'),
-            'belongsToRequester' => array('FieldValue' => null, 'FieldType' => '@bool'),
-        );
-        parent::__construct($data);
+    $this->_fields = array (
+    'CompetitivePriceId' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'Price' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_PriceType'),
+    'condition' => array('FieldValue' => null, 'FieldType' => '@string'),
+    'subcondition' => array('FieldValue' => null, 'FieldType' => '@string'),
+    'belongsToRequester' => array('FieldValue' => null, 'FieldType' => '@bool'),
+    );
+    parent::__construct($data);
     }
 
     /**
@@ -59,8 +66,8 @@ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends Marketpla
     /**
      * Set the value of the CompetitivePriceId property.
      *
-     * @param string $value competitivePriceId
-     * @return $this This instance
+     * @param string competitivePriceId
+     * @return this instance
      */
     public function setCompetitivePriceId($value)
     {
@@ -75,8 +82,8 @@ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends Marketpla
      */
     public function isSetCompetitivePriceId()
     {
-        return !is_null($this->_fields['CompetitivePriceId']['FieldValue']);
-    }
+                return !is_null($this->_fields['CompetitivePriceId']['FieldValue']);
+            }
 
     /**
      * Set the value of CompetitivePriceId, return this.
@@ -84,7 +91,7 @@ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends Marketpla
      * @param competitivePriceId
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withCompetitivePriceId($value)
     {
@@ -95,7 +102,7 @@ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends Marketpla
     /**
      * Get the value of the Price property.
      *
-     * @return MarketplaceWebServiceProducts_Model_PriceType Price.
+     * @return PriceType Price.
      */
     public function getPrice()
     {
@@ -105,8 +112,8 @@ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends Marketpla
     /**
      * Set the value of the Price property.
      *
-     * @param MarketplaceWebServiceProducts_Model_PriceType $value price
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_PriceType price
+     * @return this instance
      */
     public function setPrice($value)
     {
@@ -121,8 +128,8 @@ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends Marketpla
      */
     public function isSetPrice()
     {
-        return !is_null($this->_fields['Price']['FieldValue']);
-    }
+                return !is_null($this->_fields['Price']['FieldValue']);
+            }
 
     /**
      * Set the value of Price, return this.
@@ -130,7 +137,7 @@ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends Marketpla
      * @param price
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withPrice($value)
     {
@@ -151,8 +158,8 @@ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends Marketpla
     /**
      * Set the value of the condition property.
      *
-     * @param string $value condition
-     * @return $this This instance
+     * @param string condition
+     * @return this instance
      */
     public function setcondition($value)
     {
@@ -167,8 +174,8 @@ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends Marketpla
      */
     public function isSetcondition()
     {
-        return !is_null($this->_fields['condition']['FieldValue']);
-    }
+                return !is_null($this->_fields['condition']['FieldValue']);
+            }
 
     /**
      * Set the value of condition, return this.
@@ -176,7 +183,7 @@ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends Marketpla
      * @param condition
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withcondition($value)
     {
@@ -197,8 +204,8 @@ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends Marketpla
     /**
      * Set the value of the subcondition property.
      *
-     * @param string $value subcondition
-     * @return $this This instance
+     * @param string subcondition
+     * @return this instance
      */
     public function setsubcondition($value)
     {
@@ -213,8 +220,8 @@ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends Marketpla
      */
     public function isSetsubcondition()
     {
-        return !is_null($this->_fields['subcondition']['FieldValue']);
-    }
+                return !is_null($this->_fields['subcondition']['FieldValue']);
+            }
 
     /**
      * Set the value of subcondition, return this.
@@ -222,7 +229,7 @@ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends Marketpla
      * @param subcondition
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withsubcondition($value)
     {
@@ -253,8 +260,8 @@ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends Marketpla
     /**
      * Set the value of the belongsToRequester property.
      *
-     * @param bool $value belongsToRequester
-     * @return $this This instance
+     * @param bool belongsToRequester
+     * @return this instance
      */
     public function setbelongsToRequester($value)
     {
@@ -269,8 +276,8 @@ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends Marketpla
      */
     public function isSetbelongsToRequester()
     {
-        return !is_null($this->_fields['belongsToRequester']['FieldValue']);
-    }
+                return !is_null($this->_fields['belongsToRequester']['FieldValue']);
+            }
 
     /**
      * Set the value of belongsToRequester, return this.
@@ -278,7 +285,7 @@ class MarketplaceWebServiceProducts_Model_CompetitivePriceType extends Marketpla
      * @param belongsToRequester
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withbelongsToRequester($value)
     {

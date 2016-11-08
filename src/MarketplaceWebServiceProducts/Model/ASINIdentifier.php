@@ -1,43 +1,50 @@
 <?php
 /*******************************************************************************
- * Copyright 2009-2014 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright 2009-2016 Amazon Services. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
  *
- * You may not use this file except in compliance with the License.
+ * You may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
  * specific language governing permissions and limitations under the License.
  *******************************************************************************
  * PHP Version 5
  * @category Amazon
  * @package  Marketplace Web Service Products
  * @version  2011-10-01
- * Library Version: 2014-10-20
- * Generated: Fri Oct 17 17:59:56 GMT 2014
+ * Library Version: 2016-06-01
+ * Generated: Fri Sep 16 11:49:32 PDT 2016
  */
 
 /**
+ *  @see MarketplaceWebServiceProducts_Model
+ */
+
+require_once (dirname(__FILE__) . '/../Model.php');
+
+
+/**
  * MarketplaceWebServiceProducts_Model_ASINIdentifier
- *
+ * 
  * Properties:
  * <ul>
- *
+ * 
  * <li>MarketplaceId: string</li>
  * <li>ASIN: string</li>
  *
  * </ul>
  */
-class MarketplaceWebServiceProducts_Model_ASINIdentifier extends MarketplaceWebServiceProducts_Model
-{
+
+ class MarketplaceWebServiceProducts_Model_ASINIdentifier extends MarketplaceWebServiceProducts_Model {
 
     public function __construct($data = null)
     {
-        $this->_fields = array(
-            'MarketplaceId' => array('FieldValue' => null, 'FieldType' => 'string'),
-            'ASIN' => array('FieldValue' => null, 'FieldType' => 'string'),
-        );
-        parent::__construct($data);
+    $this->_fields = array (
+    'MarketplaceId' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'ASIN' => array('FieldValue' => null, 'FieldType' => 'string'),
+    );
+    parent::__construct($data);
     }
 
     /**
@@ -53,8 +60,8 @@ class MarketplaceWebServiceProducts_Model_ASINIdentifier extends MarketplaceWebS
     /**
      * Set the value of the MarketplaceId property.
      *
-     * @param string $value marketplaceId
-     * @return $this This instance
+     * @param string marketplaceId
+     * @return this instance
      */
     public function setMarketplaceId($value)
     {
@@ -69,8 +76,8 @@ class MarketplaceWebServiceProducts_Model_ASINIdentifier extends MarketplaceWebS
      */
     public function isSetMarketplaceId()
     {
-        return !is_null($this->_fields['MarketplaceId']['FieldValue']);
-    }
+                return !is_null($this->_fields['MarketplaceId']['FieldValue']);
+            }
 
     /**
      * Set the value of MarketplaceId, return this.
@@ -78,7 +85,7 @@ class MarketplaceWebServiceProducts_Model_ASINIdentifier extends MarketplaceWebS
      * @param marketplaceId
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withMarketplaceId($value)
     {
@@ -99,8 +106,8 @@ class MarketplaceWebServiceProducts_Model_ASINIdentifier extends MarketplaceWebS
     /**
      * Set the value of the ASIN property.
      *
-     * @param string $value asin
-     * @return $this This instance
+     * @param string asin
+     * @return this instance
      */
     public function setASIN($value)
     {
@@ -115,8 +122,8 @@ class MarketplaceWebServiceProducts_Model_ASINIdentifier extends MarketplaceWebS
      */
     public function isSetASIN()
     {
-        return !is_null($this->_fields['ASIN']['FieldValue']);
-    }
+                return !is_null($this->_fields['ASIN']['FieldValue']);
+            }
 
     /**
      * Set the value of ASIN, return this.
@@ -124,7 +131,7 @@ class MarketplaceWebServiceProducts_Model_ASINIdentifier extends MarketplaceWebS
      * @param asin
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withASIN($value)
     {

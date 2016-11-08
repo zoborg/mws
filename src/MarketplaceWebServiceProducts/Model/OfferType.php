@@ -1,28 +1,35 @@
 <?php
 /*******************************************************************************
- * Copyright 2009-2014 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright 2009-2016 Amazon Services. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
  *
- * You may not use this file except in compliance with the License.
+ * You may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
  * specific language governing permissions and limitations under the License.
  *******************************************************************************
  * PHP Version 5
  * @category Amazon
  * @package  Marketplace Web Service Products
  * @version  2011-10-01
- * Library Version: 2014-10-20
- * Generated: Fri Oct 17 17:59:56 GMT 2014
+ * Library Version: 2016-06-01
+ * Generated: Fri Sep 16 11:49:32 PDT 2016
  */
 
 /**
+ *  @see MarketplaceWebServiceProducts_Model
+ */
+
+require_once (dirname(__FILE__) . '/../Model.php');
+
+
+/**
  * MarketplaceWebServiceProducts_Model_OfferType
- *
+ * 
  * Properties:
  * <ul>
- *
+ * 
  * <li>BuyingPrice: MarketplaceWebServiceProducts_Model_PriceType</li>
  * <li>RegularPrice: MarketplaceWebServiceProducts_Model_MoneyType</li>
  * <li>FulfillmentChannel: string</li>
@@ -33,33 +40,27 @@
  *
  * </ul>
  */
-class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServiceProducts_Model
-{
+
+ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServiceProducts_Model {
 
     public function __construct($data = null)
     {
-        $this->_fields = array(
-            'BuyingPrice' => array(
-                'FieldValue' => null,
-                'FieldType' => 'MarketplaceWebServiceProducts_Model_PriceType'
-            ),
-            'RegularPrice' => array(
-                'FieldValue' => null,
-                'FieldType' => 'MarketplaceWebServiceProducts_Model_MoneyType'
-            ),
-            'FulfillmentChannel' => array('FieldValue' => null, 'FieldType' => 'string'),
-            'ItemCondition' => array('FieldValue' => null, 'FieldType' => 'string'),
-            'ItemSubCondition' => array('FieldValue' => null, 'FieldType' => 'string'),
-            'SellerId' => array('FieldValue' => null, 'FieldType' => 'string'),
-            'SellerSKU' => array('FieldValue' => null, 'FieldType' => 'string'),
-        );
-        parent::__construct($data);
+    $this->_fields = array (
+    'BuyingPrice' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_PriceType'),
+    'RegularPrice' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_MoneyType'),
+    'FulfillmentChannel' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'ItemCondition' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'ItemSubCondition' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'SellerId' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'SellerSKU' => array('FieldValue' => null, 'FieldType' => 'string'),
+    );
+    parent::__construct($data);
     }
 
     /**
      * Get the value of the BuyingPrice property.
      *
-     * @return MarketplaceWebServiceProducts_Model_PriceType BuyingPrice.
+     * @return PriceType BuyingPrice.
      */
     public function getBuyingPrice()
     {
@@ -69,8 +70,8 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
     /**
      * Set the value of the BuyingPrice property.
      *
-     * @param MarketplaceWebServiceProducts_Model_PriceType $value buyingPrice
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_PriceType buyingPrice
+     * @return this instance
      */
     public function setBuyingPrice($value)
     {
@@ -85,8 +86,8 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
      */
     public function isSetBuyingPrice()
     {
-        return !is_null($this->_fields['BuyingPrice']['FieldValue']);
-    }
+                return !is_null($this->_fields['BuyingPrice']['FieldValue']);
+            }
 
     /**
      * Set the value of BuyingPrice, return this.
@@ -94,7 +95,7 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
      * @param buyingPrice
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withBuyingPrice($value)
     {
@@ -105,7 +106,7 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
     /**
      * Get the value of the RegularPrice property.
      *
-     * @return MarketplaceWebServiceProducts_Model_MoneyType RegularPrice.
+     * @return MoneyType RegularPrice.
      */
     public function getRegularPrice()
     {
@@ -115,8 +116,8 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
     /**
      * Set the value of the RegularPrice property.
      *
-     * @param MarketplaceWebServiceProducts_Model_MoneyType $value regularPrice
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_MoneyType regularPrice
+     * @return this instance
      */
     public function setRegularPrice($value)
     {
@@ -131,8 +132,8 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
      */
     public function isSetRegularPrice()
     {
-        return !is_null($this->_fields['RegularPrice']['FieldValue']);
-    }
+                return !is_null($this->_fields['RegularPrice']['FieldValue']);
+            }
 
     /**
      * Set the value of RegularPrice, return this.
@@ -140,7 +141,7 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
      * @param regularPrice
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withRegularPrice($value)
     {
@@ -161,8 +162,8 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
     /**
      * Set the value of the FulfillmentChannel property.
      *
-     * @param string $value fulfillmentChannel
-     * @return $this This instance
+     * @param string fulfillmentChannel
+     * @return this instance
      */
     public function setFulfillmentChannel($value)
     {
@@ -177,8 +178,8 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
      */
     public function isSetFulfillmentChannel()
     {
-        return !is_null($this->_fields['FulfillmentChannel']['FieldValue']);
-    }
+                return !is_null($this->_fields['FulfillmentChannel']['FieldValue']);
+            }
 
     /**
      * Set the value of FulfillmentChannel, return this.
@@ -186,7 +187,7 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
      * @param fulfillmentChannel
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withFulfillmentChannel($value)
     {
@@ -207,8 +208,8 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
     /**
      * Set the value of the ItemCondition property.
      *
-     * @param string $value itemCondition
-     * @return $this This instance
+     * @param string itemCondition
+     * @return this instance
      */
     public function setItemCondition($value)
     {
@@ -223,8 +224,8 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
      */
     public function isSetItemCondition()
     {
-        return !is_null($this->_fields['ItemCondition']['FieldValue']);
-    }
+                return !is_null($this->_fields['ItemCondition']['FieldValue']);
+            }
 
     /**
      * Set the value of ItemCondition, return this.
@@ -232,7 +233,7 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
      * @param itemCondition
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withItemCondition($value)
     {
@@ -253,8 +254,8 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
     /**
      * Set the value of the ItemSubCondition property.
      *
-     * @param string $value itemSubCondition
-     * @return $this This instance
+     * @param string itemSubCondition
+     * @return this instance
      */
     public function setItemSubCondition($value)
     {
@@ -269,8 +270,8 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
      */
     public function isSetItemSubCondition()
     {
-        return !is_null($this->_fields['ItemSubCondition']['FieldValue']);
-    }
+                return !is_null($this->_fields['ItemSubCondition']['FieldValue']);
+            }
 
     /**
      * Set the value of ItemSubCondition, return this.
@@ -278,7 +279,7 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
      * @param itemSubCondition
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withItemSubCondition($value)
     {
@@ -299,8 +300,8 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
     /**
      * Set the value of the SellerId property.
      *
-     * @param string $value sellerId
-     * @return $this This instance
+     * @param string sellerId
+     * @return this instance
      */
     public function setSellerId($value)
     {
@@ -315,8 +316,8 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
      */
     public function isSetSellerId()
     {
-        return !is_null($this->_fields['SellerId']['FieldValue']);
-    }
+                return !is_null($this->_fields['SellerId']['FieldValue']);
+            }
 
     /**
      * Set the value of SellerId, return this.
@@ -324,7 +325,7 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
      * @param sellerId
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withSellerId($value)
     {
@@ -345,8 +346,8 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
     /**
      * Set the value of the SellerSKU property.
      *
-     * @param string $value sellerSKU
-     * @return $this This instance
+     * @param string sellerSKU
+     * @return this instance
      */
     public function setSellerSKU($value)
     {
@@ -361,8 +362,8 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
      */
     public function isSetSellerSKU()
     {
-        return !is_null($this->_fields['SellerSKU']['FieldValue']);
-    }
+                return !is_null($this->_fields['SellerSKU']['FieldValue']);
+            }
 
     /**
      * Set the value of SellerSKU, return this.
@@ -370,7 +371,7 @@ class MarketplaceWebServiceProducts_Model_OfferType extends MarketplaceWebServic
      * @param sellerSKU
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withSellerSKU($value)
     {

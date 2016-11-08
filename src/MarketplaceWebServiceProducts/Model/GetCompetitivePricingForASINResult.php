@@ -1,28 +1,35 @@
 <?php
 /*******************************************************************************
- * Copyright 2009-2014 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright 2009-2016 Amazon Services. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
  *
- * You may not use this file except in compliance with the License.
+ * You may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
  * specific language governing permissions and limitations under the License.
  *******************************************************************************
  * PHP Version 5
  * @category Amazon
  * @package  Marketplace Web Service Products
  * @version  2011-10-01
- * Library Version: 2014-10-20
- * Generated: Fri Oct 17 17:59:56 GMT 2014
+ * Library Version: 2016-06-01
+ * Generated: Fri Sep 16 11:49:32 PDT 2016
  */
 
 /**
+ *  @see MarketplaceWebServiceProducts_Model
+ */
+
+require_once (dirname(__FILE__) . '/../Model.php');
+
+
+/**
  * MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResult
- *
+ * 
  * Properties:
  * <ul>
- *
+ * 
  * <li>Product: MarketplaceWebServiceProducts_Model_Product</li>
  * <li>Error: MarketplaceWebServiceProducts_Model_Error</li>
  * <li>ASIN: string</li>
@@ -30,24 +37,24 @@
  *
  * </ul>
  */
-class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResult extends MarketplaceWebServiceProducts_Model
-{
+
+ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResult extends MarketplaceWebServiceProducts_Model {
 
     public function __construct($data = null)
     {
-        $this->_fields = array(
-            'Product' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_Product'),
-            'Error' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_Error'),
-            'ASIN' => array('FieldValue' => null, 'FieldType' => '@string'),
-            'status' => array('FieldValue' => null, 'FieldType' => '@string'),
-        );
-        parent::__construct($data);
+    $this->_fields = array (
+    'Product' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_Product'),
+    'Error' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_Error'),
+    'ASIN' => array('FieldValue' => null, 'FieldType' => '@string'),
+    'status' => array('FieldValue' => null, 'FieldType' => '@string'),
+    );
+    parent::__construct($data);
     }
 
     /**
      * Get the value of the Product property.
      *
-     * @return MarketplaceWebServiceProducts_Model_Product Product.
+     * @return Product Product.
      */
     public function getProduct()
     {
@@ -57,8 +64,8 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResult ext
     /**
      * Set the value of the Product property.
      *
-     * @param MarketplaceWebServiceProducts_Model_Product $value product
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_Product product
+     * @return this instance
      */
     public function setProduct($value)
     {
@@ -73,8 +80,8 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResult ext
      */
     public function isSetProduct()
     {
-        return !is_null($this->_fields['Product']['FieldValue']);
-    }
+                return !is_null($this->_fields['Product']['FieldValue']);
+            }
 
     /**
      * Set the value of Product, return this.
@@ -82,7 +89,7 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResult ext
      * @param product
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withProduct($value)
     {
@@ -93,7 +100,7 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResult ext
     /**
      * Get the value of the Error property.
      *
-     * @return MarketplaceWebServiceProducts_Model_Error Error.
+     * @return Error Error.
      */
     public function getError()
     {
@@ -103,8 +110,8 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResult ext
     /**
      * Set the value of the Error property.
      *
-     * @param MarketplaceWebServiceProducts_Model_Error $value error
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_Error error
+     * @return this instance
      */
     public function setError($value)
     {
@@ -119,8 +126,8 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResult ext
      */
     public function isSetError()
     {
-        return !is_null($this->_fields['Error']['FieldValue']);
-    }
+                return !is_null($this->_fields['Error']['FieldValue']);
+            }
 
     /**
      * Set the value of Error, return this.
@@ -128,7 +135,7 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResult ext
      * @param error
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withError($value)
     {
@@ -149,8 +156,8 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResult ext
     /**
      * Set the value of the ASIN property.
      *
-     * @param string $value asin
-     * @return $this This instance
+     * @param string asin
+     * @return this instance
      */
     public function setASIN($value)
     {
@@ -165,8 +172,8 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResult ext
      */
     public function isSetASIN()
     {
-        return !is_null($this->_fields['ASIN']['FieldValue']);
-    }
+                return !is_null($this->_fields['ASIN']['FieldValue']);
+            }
 
     /**
      * Set the value of ASIN, return this.
@@ -174,7 +181,7 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResult ext
      * @param asin
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withASIN($value)
     {
@@ -195,8 +202,8 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResult ext
     /**
      * Set the value of the status property.
      *
-     * @param string $value status
-     * @return $this This instance
+     * @param string status
+     * @return this instance
      */
     public function setstatus($value)
     {
@@ -211,8 +218,8 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResult ext
      */
     public function isSetstatus()
     {
-        return !is_null($this->_fields['status']['FieldValue']);
-    }
+                return !is_null($this->_fields['status']['FieldValue']);
+            }
 
     /**
      * Set the value of status, return this.
@@ -220,7 +227,7 @@ class MarketplaceWebServiceProducts_Model_GetCompetitivePricingForASINResult ext
      * @param status
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withstatus($value)
     {

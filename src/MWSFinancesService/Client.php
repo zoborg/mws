@@ -1759,7 +1759,7 @@ class MarketplaceWebService_Client implements MarketplaceWebService_Interface
         if ($request->isSetMWSAuthToken()) {
             $parameters['MWSAuthToken'] = $request->getMWSAuthToken();
         }
-        
+
 
         $result =  array(CONVERTED_PARAMETERS_KEY => $parameters, CONVERTED_HEADERS_KEY => $this->defaultHeaders);
         return $result;

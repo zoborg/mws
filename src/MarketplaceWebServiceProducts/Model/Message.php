@@ -1,43 +1,50 @@
 <?php
 /*******************************************************************************
- * Copyright 2009-2014 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright 2009-2016 Amazon Services. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
  *
- * You may not use this file except in compliance with the License.
+ * You may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
  * specific language governing permissions and limitations under the License.
  *******************************************************************************
  * PHP Version 5
  * @category Amazon
  * @package  Marketplace Web Service Products
  * @version  2011-10-01
- * Library Version: 2014-10-20
- * Generated: Fri Oct 17 17:59:56 GMT 2014
+ * Library Version: 2016-06-01
+ * Generated: Fri Sep 16 11:49:32 PDT 2016
  */
 
 /**
+ *  @see MarketplaceWebServiceProducts_Model
+ */
+
+require_once (dirname(__FILE__) . '/../Model.php');
+
+
+/**
  * MarketplaceWebServiceProducts_Model_Message
- *
+ * 
  * Properties:
  * <ul>
- *
+ * 
  * <li>Locale: string</li>
  * <li>Text: string</li>
  *
  * </ul>
  */
-class MarketplaceWebServiceProducts_Model_Message extends MarketplaceWebServiceProducts_Model
-{
+
+ class MarketplaceWebServiceProducts_Model_Message extends MarketplaceWebServiceProducts_Model {
 
     public function __construct($data = null)
     {
-        $this->_fields = array(
-            'Locale' => array('FieldValue' => null, 'FieldType' => 'string'),
-            'Text' => array('FieldValue' => null, 'FieldType' => 'string'),
-        );
-        parent::__construct($data);
+    $this->_fields = array (
+    'Locale' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'Text' => array('FieldValue' => null, 'FieldType' => 'string'),
+    );
+    parent::__construct($data);
     }
 
     /**
@@ -53,8 +60,8 @@ class MarketplaceWebServiceProducts_Model_Message extends MarketplaceWebServiceP
     /**
      * Set the value of the Locale property.
      *
-     * @param string $value locale
-     * @return $this This instance
+     * @param string locale
+     * @return this instance
      */
     public function setLocale($value)
     {
@@ -69,8 +76,8 @@ class MarketplaceWebServiceProducts_Model_Message extends MarketplaceWebServiceP
      */
     public function isSetLocale()
     {
-        return !is_null($this->_fields['Locale']['FieldValue']);
-    }
+                return !is_null($this->_fields['Locale']['FieldValue']);
+            }
 
     /**
      * Set the value of Locale, return this.
@@ -78,7 +85,7 @@ class MarketplaceWebServiceProducts_Model_Message extends MarketplaceWebServiceP
      * @param locale
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withLocale($value)
     {
@@ -99,8 +106,8 @@ class MarketplaceWebServiceProducts_Model_Message extends MarketplaceWebServiceP
     /**
      * Set the value of the Text property.
      *
-     * @param string $value text
-     * @return $this This instance
+     * @param string text
+     * @return this instance
      */
     public function setText($value)
     {
@@ -115,8 +122,8 @@ class MarketplaceWebServiceProducts_Model_Message extends MarketplaceWebServiceP
      */
     public function isSetText()
     {
-        return !is_null($this->_fields['Text']['FieldValue']);
-    }
+                return !is_null($this->_fields['Text']['FieldValue']);
+            }
 
     /**
      * Set the value of Text, return this.
@@ -124,7 +131,7 @@ class MarketplaceWebServiceProducts_Model_Message extends MarketplaceWebServiceP
      * @param text
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withText($value)
     {

@@ -1,28 +1,35 @@
 <?php
 /*******************************************************************************
- * Copyright 2009-2014 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright 2009-2016 Amazon Services. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
  *
- * You may not use this file except in compliance with the License.
+ * You may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
  * specific language governing permissions and limitations under the License.
  *******************************************************************************
  * PHP Version 5
  * @category Amazon
  * @package  Marketplace Web Service Products
  * @version  2011-10-01
- * Library Version: 2014-10-20
- * Generated: Fri Oct 17 17:59:56 GMT 2014
+ * Library Version: 2016-06-01
+ * Generated: Fri Sep 16 11:49:32 PDT 2016
  */
 
 /**
+ *  @see MarketplaceWebServiceProducts_Model
+ */
+
+require_once (dirname(__FILE__) . '/../Model.php');
+
+
+/**
  * MarketplaceWebServiceProducts_Model_Product
- *
+ * 
  * Properties:
  * <ul>
- *
+ * 
  * <li>Identifiers: MarketplaceWebServiceProducts_Model_IdentifierType</li>
  * <li>AttributeSets: MarketplaceWebServiceProducts_Model_AttributeSetList</li>
  * <li>Relationships: MarketplaceWebServiceProducts_Model_RelationshipList</li>
@@ -33,45 +40,27 @@
  *
  * </ul>
  */
-class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceProducts_Model
-{
+
+ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceProducts_Model {
 
     public function __construct($data = null)
     {
-        $this->_fields = array(
-            'Identifiers' => array(
-                'FieldValue' => null,
-                'FieldType' => 'MarketplaceWebServiceProducts_Model_IdentifierType'
-            ),
-            'AttributeSets' => array(
-                'FieldValue' => null,
-                'FieldType' => 'MarketplaceWebServiceProducts_Model_AttributeSetList'
-            ),
-            'Relationships' => array(
-                'FieldValue' => null,
-                'FieldType' => 'MarketplaceWebServiceProducts_Model_RelationshipList'
-            ),
-            'CompetitivePricing' => array(
-                'FieldValue' => null,
-                'FieldType' => 'MarketplaceWebServiceProducts_Model_CompetitivePricingType'
-            ),
-            'SalesRankings' => array(
-                'FieldValue' => null,
-                'FieldType' => 'MarketplaceWebServiceProducts_Model_SalesRankList'
-            ),
-            'LowestOfferListings' => array(
-                'FieldValue' => null,
-                'FieldType' => 'MarketplaceWebServiceProducts_Model_LowestOfferListingList'
-            ),
-            'Offers' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_OffersList'),
-        );
-        parent::__construct($data);
+    $this->_fields = array (
+    'Identifiers' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_IdentifierType'),
+    'AttributeSets' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_AttributeSetList'),
+    'Relationships' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_RelationshipList'),
+    'CompetitivePricing' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_CompetitivePricingType'),
+    'SalesRankings' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_SalesRankList'),
+    'LowestOfferListings' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_LowestOfferListingList'),
+    'Offers' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_OffersList'),
+    );
+    parent::__construct($data);
     }
 
     /**
      * Get the value of the Identifiers property.
      *
-     * @return MarketplaceWebServiceProducts_Model_IdentifierType Identifiers.
+     * @return IdentifierType Identifiers.
      */
     public function getIdentifiers()
     {
@@ -81,8 +70,8 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
     /**
      * Set the value of the Identifiers property.
      *
-     * @param MarketplaceWebServiceProducts_Model_IdentifierType $value identifiers
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_IdentifierType identifiers
+     * @return this instance
      */
     public function setIdentifiers($value)
     {
@@ -97,8 +86,8 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
      */
     public function isSetIdentifiers()
     {
-        return !is_null($this->_fields['Identifiers']['FieldValue']);
-    }
+                return !is_null($this->_fields['Identifiers']['FieldValue']);
+            }
 
     /**
      * Set the value of Identifiers, return this.
@@ -106,7 +95,7 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
      * @param identifiers
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withIdentifiers($value)
     {
@@ -117,7 +106,7 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
     /**
      * Get the value of the AttributeSets property.
      *
-     * @return MarketplaceWebServiceProducts_Model_AttributeSetList AttributeSets.
+     * @return AttributeSetList AttributeSets.
      */
     public function getAttributeSets()
     {
@@ -127,8 +116,8 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
     /**
      * Set the value of the AttributeSets property.
      *
-     * @param MarketplaceWebServiceProducts_Model_AttributeSetList $value attributeSets
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_AttributeSetList attributeSets
+     * @return this instance
      */
     public function setAttributeSets($value)
     {
@@ -143,8 +132,8 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
      */
     public function isSetAttributeSets()
     {
-        return !is_null($this->_fields['AttributeSets']['FieldValue']);
-    }
+                return !is_null($this->_fields['AttributeSets']['FieldValue']);
+            }
 
     /**
      * Set the value of AttributeSets, return this.
@@ -152,7 +141,7 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
      * @param attributeSets
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withAttributeSets($value)
     {
@@ -163,7 +152,7 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
     /**
      * Get the value of the Relationships property.
      *
-     * @return MarketplaceWebServiceProducts_Model_RelationshipList Relationships.
+     * @return RelationshipList Relationships.
      */
     public function getRelationships()
     {
@@ -173,8 +162,8 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
     /**
      * Set the value of the Relationships property.
      *
-     * @param MarketplaceWebServiceProducts_Model_RelationshipList $value relationships
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_RelationshipList relationships
+     * @return this instance
      */
     public function setRelationships($value)
     {
@@ -189,8 +178,8 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
      */
     public function isSetRelationships()
     {
-        return !is_null($this->_fields['Relationships']['FieldValue']);
-    }
+                return !is_null($this->_fields['Relationships']['FieldValue']);
+            }
 
     /**
      * Set the value of Relationships, return this.
@@ -198,7 +187,7 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
      * @param relationships
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withRelationships($value)
     {
@@ -209,7 +198,7 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
     /**
      * Get the value of the CompetitivePricing property.
      *
-     * @return MarketplaceWebServiceProducts_Model_CompetitivePricingType CompetitivePricing.
+     * @return CompetitivePricingType CompetitivePricing.
      */
     public function getCompetitivePricing()
     {
@@ -219,8 +208,8 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
     /**
      * Set the value of the CompetitivePricing property.
      *
-     * @param MarketplaceWebServiceProducts_Model_CompetitivePricingType $value competitivePricing
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_CompetitivePricingType competitivePricing
+     * @return this instance
      */
     public function setCompetitivePricing($value)
     {
@@ -235,8 +224,8 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
      */
     public function isSetCompetitivePricing()
     {
-        return !is_null($this->_fields['CompetitivePricing']['FieldValue']);
-    }
+                return !is_null($this->_fields['CompetitivePricing']['FieldValue']);
+            }
 
     /**
      * Set the value of CompetitivePricing, return this.
@@ -244,7 +233,7 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
      * @param competitivePricing
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withCompetitivePricing($value)
     {
@@ -255,7 +244,7 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
     /**
      * Get the value of the SalesRankings property.
      *
-     * @return MarketplaceWebServiceProducts_Model_SalesRankList SalesRankings.
+     * @return SalesRankList SalesRankings.
      */
     public function getSalesRankings()
     {
@@ -265,8 +254,8 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
     /**
      * Set the value of the SalesRankings property.
      *
-     * @param MarketplaceWebServiceProducts_Model_SalesRankList $value salesRankings
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_SalesRankList salesRankings
+     * @return this instance
      */
     public function setSalesRankings($value)
     {
@@ -281,8 +270,8 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
      */
     public function isSetSalesRankings()
     {
-        return !is_null($this->_fields['SalesRankings']['FieldValue']);
-    }
+                return !is_null($this->_fields['SalesRankings']['FieldValue']);
+            }
 
     /**
      * Set the value of SalesRankings, return this.
@@ -290,7 +279,7 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
      * @param salesRankings
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withSalesRankings($value)
     {
@@ -301,7 +290,7 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
     /**
      * Get the value of the LowestOfferListings property.
      *
-     * @return MarketplaceWebServiceProducts_Model_LowestOfferListingList LowestOfferListings.
+     * @return LowestOfferListingList LowestOfferListings.
      */
     public function getLowestOfferListings()
     {
@@ -311,8 +300,8 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
     /**
      * Set the value of the LowestOfferListings property.
      *
-     * @param MarketplaceWebServiceProducts_Model_LowestOfferListingList $value lowestOfferListings
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_LowestOfferListingList lowestOfferListings
+     * @return this instance
      */
     public function setLowestOfferListings($value)
     {
@@ -327,8 +316,8 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
      */
     public function isSetLowestOfferListings()
     {
-        return !is_null($this->_fields['LowestOfferListings']['FieldValue']);
-    }
+                return !is_null($this->_fields['LowestOfferListings']['FieldValue']);
+            }
 
     /**
      * Set the value of LowestOfferListings, return this.
@@ -336,7 +325,7 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
      * @param lowestOfferListings
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withLowestOfferListings($value)
     {
@@ -347,7 +336,7 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
     /**
      * Get the value of the Offers property.
      *
-     * @return MarketplaceWebServiceProducts_Model_OffersList Offers.
+     * @return OffersList Offers.
      */
     public function getOffers()
     {
@@ -357,8 +346,8 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
     /**
      * Set the value of the Offers property.
      *
-     * @param MarketplaceWebServiceProducts_Model_OffersList $value offers
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_OffersList offers
+     * @return this instance
      */
     public function setOffers($value)
     {
@@ -373,8 +362,8 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
      */
     public function isSetOffers()
     {
-        return !is_null($this->_fields['Offers']['FieldValue']);
-    }
+                return !is_null($this->_fields['Offers']['FieldValue']);
+            }
 
     /**
      * Set the value of Offers, return this.
@@ -382,7 +371,7 @@ class MarketplaceWebServiceProducts_Model_Product extends MarketplaceWebServiceP
      * @param offers
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withOffers($value)
     {

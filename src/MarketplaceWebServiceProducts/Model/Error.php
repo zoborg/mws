@@ -1,28 +1,35 @@
 <?php
 /*******************************************************************************
- * Copyright 2009-2014 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright 2009-2016 Amazon Services. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
  *
- * You may not use this file except in compliance with the License.
+ * You may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
  * specific language governing permissions and limitations under the License.
  *******************************************************************************
  * PHP Version 5
  * @category Amazon
  * @package  Marketplace Web Service Products
  * @version  2011-10-01
- * Library Version: 2014-10-20
- * Generated: Fri Oct 17 17:59:56 GMT 2014
+ * Library Version: 2016-06-01
+ * Generated: Fri Sep 16 11:49:32 PDT 2016
  */
 
 /**
+ *  @see MarketplaceWebServiceProducts_Model
+ */
+
+require_once (dirname(__FILE__) . '/../Model.php');
+
+
+/**
  * MarketplaceWebServiceProducts_Model_Error
- *
+ * 
  * Properties:
  * <ul>
- *
+ * 
  * <li>Type: string</li>
  * <li>Code: string</li>
  * <li>Message: string</li>
@@ -30,18 +37,18 @@
  *
  * </ul>
  */
-class MarketplaceWebServiceProducts_Model_Error extends MarketplaceWebServiceProducts_Model
-{
+
+ class MarketplaceWebServiceProducts_Model_Error extends MarketplaceWebServiceProducts_Model {
 
     public function __construct($data = null)
     {
-        $this->_fields = array(
-            'Type' => array('FieldValue' => null, 'FieldType' => 'string'),
-            'Code' => array('FieldValue' => null, 'FieldType' => 'string'),
-            'Message' => array('FieldValue' => null, 'FieldType' => 'string'),
-            'Detail' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_ErrorDetail'),
-        );
-        parent::__construct($data);
+    $this->_fields = array (
+    'Type' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'Code' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'Message' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'Detail' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_ErrorDetail'),
+    );
+    parent::__construct($data);
     }
 
     /**
@@ -57,8 +64,8 @@ class MarketplaceWebServiceProducts_Model_Error extends MarketplaceWebServicePro
     /**
      * Set the value of the Type property.
      *
-     * @param string $value type
-     * @return $this This instance
+     * @param string type
+     * @return this instance
      */
     public function setType($value)
     {
@@ -73,8 +80,8 @@ class MarketplaceWebServiceProducts_Model_Error extends MarketplaceWebServicePro
      */
     public function isSetType()
     {
-        return !is_null($this->_fields['Type']['FieldValue']);
-    }
+                return !is_null($this->_fields['Type']['FieldValue']);
+            }
 
     /**
      * Set the value of Type, return this.
@@ -82,7 +89,7 @@ class MarketplaceWebServiceProducts_Model_Error extends MarketplaceWebServicePro
      * @param type
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withType($value)
     {
@@ -103,8 +110,8 @@ class MarketplaceWebServiceProducts_Model_Error extends MarketplaceWebServicePro
     /**
      * Set the value of the Code property.
      *
-     * @param string $value code
-     * @return $this This instance
+     * @param string code
+     * @return this instance
      */
     public function setCode($value)
     {
@@ -119,8 +126,8 @@ class MarketplaceWebServiceProducts_Model_Error extends MarketplaceWebServicePro
      */
     public function isSetCode()
     {
-        return !is_null($this->_fields['Code']['FieldValue']);
-    }
+                return !is_null($this->_fields['Code']['FieldValue']);
+            }
 
     /**
      * Set the value of Code, return this.
@@ -128,7 +135,7 @@ class MarketplaceWebServiceProducts_Model_Error extends MarketplaceWebServicePro
      * @param code
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withCode($value)
     {
@@ -149,8 +156,8 @@ class MarketplaceWebServiceProducts_Model_Error extends MarketplaceWebServicePro
     /**
      * Set the value of the Message property.
      *
-     * @param string $value message
-     * @return $this This instance
+     * @param string message
+     * @return this instance
      */
     public function setMessage($value)
     {
@@ -165,8 +172,8 @@ class MarketplaceWebServiceProducts_Model_Error extends MarketplaceWebServicePro
      */
     public function isSetMessage()
     {
-        return !is_null($this->_fields['Message']['FieldValue']);
-    }
+                return !is_null($this->_fields['Message']['FieldValue']);
+            }
 
     /**
      * Set the value of Message, return this.
@@ -174,7 +181,7 @@ class MarketplaceWebServiceProducts_Model_Error extends MarketplaceWebServicePro
      * @param message
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withMessage($value)
     {
@@ -185,7 +192,7 @@ class MarketplaceWebServiceProducts_Model_Error extends MarketplaceWebServicePro
     /**
      * Get the value of the Detail property.
      *
-     * @return MarketplaceWebServiceProducts_Model_ErrorDetail Detail.
+     * @return ErrorDetail Detail.
      */
     public function getDetail()
     {
@@ -195,8 +202,8 @@ class MarketplaceWebServiceProducts_Model_Error extends MarketplaceWebServicePro
     /**
      * Set the value of the Detail property.
      *
-     * @param MarketplaceWebServiceProducts_Model_ErrorDetail $value detail
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_ErrorDetail detail
+     * @return this instance
      */
     public function setDetail($value)
     {
@@ -211,8 +218,8 @@ class MarketplaceWebServiceProducts_Model_Error extends MarketplaceWebServicePro
      */
     public function isSetDetail()
     {
-        return !is_null($this->_fields['Detail']['FieldValue']);
-    }
+                return !is_null($this->_fields['Detail']['FieldValue']);
+            }
 
     /**
      * Set the value of Detail, return this.
@@ -220,7 +227,7 @@ class MarketplaceWebServiceProducts_Model_Error extends MarketplaceWebServicePro
      * @param detail
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withDetail($value)
     {

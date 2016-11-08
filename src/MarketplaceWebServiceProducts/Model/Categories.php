@@ -1,45 +1,52 @@
 <?php
 /*******************************************************************************
- * Copyright 2009-2014 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright 2009-2016 Amazon Services. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
  *
- * You may not use this file except in compliance with the License.
+ * You may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
  * specific language governing permissions and limitations under the License.
  *******************************************************************************
  * PHP Version 5
  * @category Amazon
  * @package  Marketplace Web Service Products
  * @version  2011-10-01
- * Library Version: 2014-10-20
- * Generated: Fri Oct 17 17:59:56 GMT 2014
+ * Library Version: 2016-06-01
+ * Generated: Fri Sep 16 11:49:32 PDT 2016
  */
 
 /**
+ *  @see MarketplaceWebServiceProducts_Model
+ */
+
+require_once (dirname(__FILE__) . '/../Model.php');
+
+
+/**
  * MarketplaceWebServiceProducts_Model_Categories
- *
+ * 
  * Properties:
  * <ul>
- *
+ * 
  * <li>ProductCategoryId: string</li>
  * <li>ProductCategoryName: string</li>
  * <li>Parent: MarketplaceWebServiceProducts_Model_Categories</li>
  *
  * </ul>
  */
-class MarketplaceWebServiceProducts_Model_Categories extends MarketplaceWebServiceProducts_Model
-{
+
+ class MarketplaceWebServiceProducts_Model_Categories extends MarketplaceWebServiceProducts_Model {
 
     public function __construct($data = null)
     {
-        $this->_fields = array(
-            'ProductCategoryId' => array('FieldValue' => null, 'FieldType' => 'string'),
-            'ProductCategoryName' => array('FieldValue' => null, 'FieldType' => 'string'),
-            'Parent' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_Categories'),
-        );
-        parent::__construct($data);
+    $this->_fields = array (
+    'ProductCategoryId' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'ProductCategoryName' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'Parent' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_Categories'),
+    );
+    parent::__construct($data);
     }
 
     /**
@@ -55,8 +62,8 @@ class MarketplaceWebServiceProducts_Model_Categories extends MarketplaceWebServi
     /**
      * Set the value of the ProductCategoryId property.
      *
-     * @param string $value productCategoryId
-     * @return $this This instance
+     * @param string productCategoryId
+     * @return this instance
      */
     public function setProductCategoryId($value)
     {
@@ -71,8 +78,8 @@ class MarketplaceWebServiceProducts_Model_Categories extends MarketplaceWebServi
      */
     public function isSetProductCategoryId()
     {
-        return !is_null($this->_fields['ProductCategoryId']['FieldValue']);
-    }
+                return !is_null($this->_fields['ProductCategoryId']['FieldValue']);
+            }
 
     /**
      * Set the value of ProductCategoryId, return this.
@@ -80,7 +87,7 @@ class MarketplaceWebServiceProducts_Model_Categories extends MarketplaceWebServi
      * @param productCategoryId
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withProductCategoryId($value)
     {
@@ -101,8 +108,8 @@ class MarketplaceWebServiceProducts_Model_Categories extends MarketplaceWebServi
     /**
      * Set the value of the ProductCategoryName property.
      *
-     * @param string $value productCategoryName
-     * @return $this This instance
+     * @param string productCategoryName
+     * @return this instance
      */
     public function setProductCategoryName($value)
     {
@@ -117,8 +124,8 @@ class MarketplaceWebServiceProducts_Model_Categories extends MarketplaceWebServi
      */
     public function isSetProductCategoryName()
     {
-        return !is_null($this->_fields['ProductCategoryName']['FieldValue']);
-    }
+                return !is_null($this->_fields['ProductCategoryName']['FieldValue']);
+            }
 
     /**
      * Set the value of ProductCategoryName, return this.
@@ -126,7 +133,7 @@ class MarketplaceWebServiceProducts_Model_Categories extends MarketplaceWebServi
      * @param productCategoryName
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withProductCategoryName($value)
     {
@@ -137,7 +144,7 @@ class MarketplaceWebServiceProducts_Model_Categories extends MarketplaceWebServi
     /**
      * Get the value of the Parent property.
      *
-     * @return MarketplaceWebServiceProducts_Model_Categories Parent.
+     * @return Categories Parent.
      */
     public function getParent()
     {
@@ -147,8 +154,8 @@ class MarketplaceWebServiceProducts_Model_Categories extends MarketplaceWebServi
     /**
      * Set the value of the Parent property.
      *
-     * @param MarketplaceWebServiceProducts_Model_Categories $value parent
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_Categories parent
+     * @return this instance
      */
     public function setParent($value)
     {
@@ -163,8 +170,8 @@ class MarketplaceWebServiceProducts_Model_Categories extends MarketplaceWebServi
      */
     public function isSetParent()
     {
-        return !is_null($this->_fields['Parent']['FieldValue']);
-    }
+                return !is_null($this->_fields['Parent']['FieldValue']);
+            }
 
     /**
      * Set the value of Parent, return this.
@@ -172,7 +179,7 @@ class MarketplaceWebServiceProducts_Model_Categories extends MarketplaceWebServi
      * @param parent
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withParent($value)
     {

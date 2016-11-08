@@ -1,64 +1,63 @@
 <?php
 /*******************************************************************************
- * Copyright 2009-2014 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright 2009-2016 Amazon Services. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
  *
- * You may not use this file except in compliance with the License.
+ * You may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
  * specific language governing permissions and limitations under the License.
  *******************************************************************************
  * PHP Version 5
  * @category Amazon
  * @package  Marketplace Web Service Products
  * @version  2011-10-01
- * Library Version: 2014-10-20
- * Generated: Fri Oct 17 17:59:56 GMT 2014
+ * Library Version: 2016-06-01
+ * Generated: Fri Sep 16 11:49:32 PDT 2016
  */
 
 /**
+ *  @see MarketplaceWebServiceProducts_Model
+ */
+
+require_once (dirname(__FILE__) . '/../Model.php');
+
+
+/**
  * MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse
- *
+ * 
  * Properties:
  * <ul>
- *
+ * 
  * <li>GetLowestOfferListingsForASINResult: array</li>
  * <li>ResponseMetadata: MarketplaceWebServiceProducts_Model_ResponseMetadata</li>
  * <li>ResponseHeaderMetadata: MarketplaceWebServiceProducts_Model_ResponseHeaderMetadata</li>
  *
  * </ul>
  */
-class MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse extends MarketplaceWebServiceProducts_Model
-{
+
+ class MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse extends MarketplaceWebServiceProducts_Model {
 
     public function __construct($data = null)
     {
-        $this->_fields = array(
-            'GetLowestOfferListingsForASINResult' => array(
-                'FieldValue' => array(),
-                'FieldType' => array('MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResult')
-            ),
-            'ResponseMetadata' => array(
-                'FieldValue' => null,
-                'FieldType' => 'MarketplaceWebServiceProducts_Model_ResponseMetadata'
-            ),
-            'ResponseHeaderMetadata' => array(
-                'FieldValue' => null,
-                'FieldType' => 'MarketplaceWebServiceProducts_Model_ResponseHeaderMetadata'
-            ),
-        );
-        parent::__construct($data);
+    $this->_fields = array (
+    'GetLowestOfferListingsForASINResult' => array('FieldValue' => array(), 'FieldType' => array('MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResult')),
+    'ResponseMetadata' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_ResponseMetadata'),
+    'ResponseHeaderMetadata' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_ResponseHeaderMetadata'),
+    );
+    parent::__construct($data);
     }
 
     /**
      * Get the value of the GetLowestOfferListingsForASINResult property.
      *
-     * @return MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResult[] GetLowestOfferListingsForASINResult.
+     * @return List<GetLowestOfferListingsForASINResult> GetLowestOfferListingsForASINResult.
      */
     public function getGetLowestOfferListingsForASINResult()
     {
-        if ($this->_fields['GetLowestOfferListingsForASINResult']['FieldValue'] == null) {
+        if ($this->_fields['GetLowestOfferListingsForASINResult']['FieldValue'] == null)
+        {
             $this->_fields['GetLowestOfferListingsForASINResult']['FieldValue'] = array();
         }
         return $this->_fields['GetLowestOfferListingsForASINResult']['FieldValue'];
@@ -67,13 +66,13 @@ class MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse 
     /**
      * Set the value of the GetLowestOfferListingsForASINResult property.
      *
-     * @param array $value getLowestOfferListingsForASINResult
-     * @return $this This instance
+     * @param array getLowestOfferListingsForASINResult
+     * @return this instance
      */
     public function setGetLowestOfferListingsForASINResult($value)
     {
         if (!$this->_isNumericArray($value)) {
-            $value = array($value);
+            $value = array ($value);
         }
         $this->_fields['GetLowestOfferListingsForASINResult']['FieldValue'] = $value;
         return $this;
@@ -94,8 +93,8 @@ class MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse 
      */
     public function isSetGetLowestOfferListingsForASINResult()
     {
-        return !empty($this->_fields['GetLowestOfferListingsForASINResult']['FieldValue']);
-    }
+                return !empty($this->_fields['GetLowestOfferListingsForASINResult']['FieldValue']);
+            }
 
     /**
      * Add values for GetLowestOfferListingsForASINResult, return this.
@@ -103,11 +102,12 @@ class MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse 
      * @param getLowestOfferListingsForASINResult
      *             New values to add.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withGetLowestOfferListingsForASINResult()
     {
-        foreach (func_get_args() as $GetLowestOfferListingsForASINResult) {
+        foreach (func_get_args() as $GetLowestOfferListingsForASINResult)
+        {
             $this->_fields['GetLowestOfferListingsForASINResult']['FieldValue'][] = $GetLowestOfferListingsForASINResult;
         }
         return $this;
@@ -116,7 +116,7 @@ class MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse 
     /**
      * Get the value of the ResponseMetadata property.
      *
-     * @return MarketplaceWebServiceProducts_Model_ResponseMetadata ResponseMetadata.
+     * @return ResponseMetadata ResponseMetadata.
      */
     public function getResponseMetadata()
     {
@@ -126,8 +126,8 @@ class MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse 
     /**
      * Set the value of the ResponseMetadata property.
      *
-     * @param MarketplaceWebServiceProducts_Model_ResponseMetadata $value responseMetadata
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_ResponseMetadata responseMetadata
+     * @return this instance
      */
     public function setResponseMetadata($value)
     {
@@ -142,8 +142,8 @@ class MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse 
      */
     public function isSetResponseMetadata()
     {
-        return !is_null($this->_fields['ResponseMetadata']['FieldValue']);
-    }
+                return !is_null($this->_fields['ResponseMetadata']['FieldValue']);
+            }
 
     /**
      * Set the value of ResponseMetadata, return this.
@@ -151,7 +151,7 @@ class MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse 
      * @param responseMetadata
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withResponseMetadata($value)
     {
@@ -162,7 +162,7 @@ class MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse 
     /**
      * Get the value of the ResponseHeaderMetadata property.
      *
-     * @return MarketplaceWebServiceProducts_Model_ResponseHeaderMetadata ResponseHeaderMetadata.
+     * @return ResponseHeaderMetadata ResponseHeaderMetadata.
      */
     public function getResponseHeaderMetadata()
     {
@@ -172,8 +172,8 @@ class MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse 
     /**
      * Set the value of the ResponseHeaderMetadata property.
      *
-     * @param MarketplaceWebServiceProducts_Model_ResponseHeaderMetadata $value responseHeaderMetadata
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_ResponseHeaderMetadata responseHeaderMetadata
+     * @return this instance
      */
     public function setResponseHeaderMetadata($value)
     {
@@ -188,8 +188,8 @@ class MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse 
      */
     public function isSetResponseHeaderMetadata()
     {
-        return !is_null($this->_fields['ResponseHeaderMetadata']['FieldValue']);
-    }
+                return !is_null($this->_fields['ResponseHeaderMetadata']['FieldValue']);
+            }
 
     /**
      * Set the value of ResponseHeaderMetadata, return this.
@@ -197,21 +197,20 @@ class MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse 
      * @param responseHeaderMetadata
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withResponseHeaderMetadata($value)
     {
         $this->setResponseHeaderMetadata($value);
         return $this;
     }
-
     /**
      * Construct MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse from XML string
-     *
+     * 
      * @param $xml
      *        XML string to construct from
-     * @return MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse
-     * @throws Exception
+     *
+     * @return MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse 
      */
     public static function fromXML($xml)
     {
@@ -220,19 +219,18 @@ class MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse 
         $xpath = new DOMXPath($dom);
         $response = $xpath->query("//*[local-name()='GetLowestOfferListingsForASINResponse']");
         if ($response->length == 1) {
-            return new MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse(($response->item(0)));
+            return new MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse(($response->item(0))); 
         } else {
             throw new Exception ("Unable to construct MarketplaceWebServiceProducts_Model_GetLowestOfferListingsForASINResponse from provided XML. 
                                   Make sure that GetLowestOfferListingsForASINResponse is a root element");
         }
     }
-
     /**
      * XML Representation for this object
-     *
+     * 
      * @return string XML for this object
      */
-    public function toXML()
+    public function toXML() 
     {
         $xml = "";
         $xml .= "<GetLowestOfferListingsForASINResponse xmlns=\"http://mws.amazonservices.com/schema/Products/2011-10-01\">";

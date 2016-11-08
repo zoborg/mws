@@ -1,60 +1,58 @@
 <?php
 /*******************************************************************************
- * Copyright 2009-2014 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright 2009-2016 Amazon Services. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
  *
- * You may not use this file except in compliance with the License.
+ * You may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
  * specific language governing permissions and limitations under the License.
  *******************************************************************************
  * PHP Version 5
  * @category Amazon
  * @package  Marketplace Web Service Products
  * @version  2011-10-01
- * Library Version: 2014-10-20
- * Generated: Fri Oct 17 17:59:56 GMT 2014
+ * Library Version: 2016-06-01
+ * Generated: Fri Sep 16 11:49:32 PDT 2016
  */
 
 /**
+ *  @see MarketplaceWebServiceProducts_Model
+ */
+
+require_once (dirname(__FILE__) . '/../Model.php');
+
+
+/**
  * MarketplaceWebServiceProducts_Model_CompetitivePricingType
- *
+ * 
  * Properties:
  * <ul>
- *
+ * 
  * <li>CompetitivePrices: MarketplaceWebServiceProducts_Model_CompetitivePriceList</li>
  * <li>NumberOfOfferListings: MarketplaceWebServiceProducts_Model_NumberOfOfferListingsList</li>
  * <li>TradeInValue: MarketplaceWebServiceProducts_Model_MoneyType</li>
  *
  * </ul>
  */
-class MarketplaceWebServiceProducts_Model_CompetitivePricingType extends MarketplaceWebServiceProducts_Model
-{
+
+ class MarketplaceWebServiceProducts_Model_CompetitivePricingType extends MarketplaceWebServiceProducts_Model {
 
     public function __construct($data = null)
     {
-        $this->_fields = array(
-            'CompetitivePrices' => array(
-                'FieldValue' => null,
-                'FieldType' => 'MarketplaceWebServiceProducts_Model_CompetitivePriceList'
-            ),
-            'NumberOfOfferListings' => array(
-                'FieldValue' => null,
-                'FieldType' => 'MarketplaceWebServiceProducts_Model_NumberOfOfferListingsList'
-            ),
-            'TradeInValue' => array(
-                'FieldValue' => null,
-                'FieldType' => 'MarketplaceWebServiceProducts_Model_MoneyType'
-            ),
-        );
-        parent::__construct($data);
+    $this->_fields = array (
+    'CompetitivePrices' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_CompetitivePriceList'),
+    'NumberOfOfferListings' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_NumberOfOfferListingsList'),
+    'TradeInValue' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_MoneyType'),
+    );
+    parent::__construct($data);
     }
 
     /**
      * Get the value of the CompetitivePrices property.
      *
-     * @return MarketplaceWebServiceProducts_Model_CompetitivePriceList CompetitivePrices.
+     * @return CompetitivePriceList CompetitivePrices.
      */
     public function getCompetitivePrices()
     {
@@ -64,8 +62,8 @@ class MarketplaceWebServiceProducts_Model_CompetitivePricingType extends Marketp
     /**
      * Set the value of the CompetitivePrices property.
      *
-     * @param MarketplaceWebServiceProducts_Model_CompetitivePriceList $value competitivePrices
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_CompetitivePriceList competitivePrices
+     * @return this instance
      */
     public function setCompetitivePrices($value)
     {
@@ -80,8 +78,8 @@ class MarketplaceWebServiceProducts_Model_CompetitivePricingType extends Marketp
      */
     public function isSetCompetitivePrices()
     {
-        return !is_null($this->_fields['CompetitivePrices']['FieldValue']);
-    }
+                return !is_null($this->_fields['CompetitivePrices']['FieldValue']);
+            }
 
     /**
      * Set the value of CompetitivePrices, return this.
@@ -89,7 +87,7 @@ class MarketplaceWebServiceProducts_Model_CompetitivePricingType extends Marketp
      * @param competitivePrices
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withCompetitivePrices($value)
     {
@@ -100,7 +98,7 @@ class MarketplaceWebServiceProducts_Model_CompetitivePricingType extends Marketp
     /**
      * Get the value of the NumberOfOfferListings property.
      *
-     * @return MarketplaceWebServiceProducts_Model_NumberOfOfferListingsList NumberOfOfferListings.
+     * @return NumberOfOfferListingsList NumberOfOfferListings.
      */
     public function getNumberOfOfferListings()
     {
@@ -110,8 +108,8 @@ class MarketplaceWebServiceProducts_Model_CompetitivePricingType extends Marketp
     /**
      * Set the value of the NumberOfOfferListings property.
      *
-     * @param MarketplaceWebServiceProducts_Model_NumberOfOfferListingsList $value numberOfOfferListings
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_NumberOfOfferListingsList numberOfOfferListings
+     * @return this instance
      */
     public function setNumberOfOfferListings($value)
     {
@@ -126,8 +124,8 @@ class MarketplaceWebServiceProducts_Model_CompetitivePricingType extends Marketp
      */
     public function isSetNumberOfOfferListings()
     {
-        return !is_null($this->_fields['NumberOfOfferListings']['FieldValue']);
-    }
+                return !is_null($this->_fields['NumberOfOfferListings']['FieldValue']);
+            }
 
     /**
      * Set the value of NumberOfOfferListings, return this.
@@ -135,7 +133,7 @@ class MarketplaceWebServiceProducts_Model_CompetitivePricingType extends Marketp
      * @param numberOfOfferListings
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withNumberOfOfferListings($value)
     {
@@ -146,7 +144,7 @@ class MarketplaceWebServiceProducts_Model_CompetitivePricingType extends Marketp
     /**
      * Get the value of the TradeInValue property.
      *
-     * @return MarketplaceWebServiceProducts_Model_MoneyType TradeInValue.
+     * @return MoneyType TradeInValue.
      */
     public function getTradeInValue()
     {
@@ -156,8 +154,8 @@ class MarketplaceWebServiceProducts_Model_CompetitivePricingType extends Marketp
     /**
      * Set the value of the TradeInValue property.
      *
-     * @param MarketplaceWebServiceProducts_Model_MoneyType $value tradeInValue
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_MoneyType tradeInValue
+     * @return this instance
      */
     public function setTradeInValue($value)
     {
@@ -172,8 +170,8 @@ class MarketplaceWebServiceProducts_Model_CompetitivePricingType extends Marketp
      */
     public function isSetTradeInValue()
     {
-        return !is_null($this->_fields['TradeInValue']['FieldValue']);
-    }
+                return !is_null($this->_fields['TradeInValue']['FieldValue']);
+            }
 
     /**
      * Set the value of TradeInValue, return this.
@@ -181,7 +179,7 @@ class MarketplaceWebServiceProducts_Model_CompetitivePricingType extends Marketp
      * @param tradeInValue
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withTradeInValue($value)
     {

@@ -1,28 +1,35 @@
 <?php
 /*******************************************************************************
- * Copyright 2009-2014 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright 2009-2016 Amazon Services. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
  *
- * You may not use this file except in compliance with the License.
+ * You may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
  * specific language governing permissions and limitations under the License.
  *******************************************************************************
  * PHP Version 5
  * @category Amazon
  * @package  Marketplace Web Service Products
  * @version  2011-10-01
- * Library Version: 2014-10-20
- * Generated: Fri Oct 17 17:59:56 GMT 2014
+ * Library Version: 2016-06-01
+ * Generated: Fri Sep 16 11:49:32 PDT 2016
  */
 
 /**
+ *  @see MarketplaceWebServiceProducts_Model
+ */
+
+require_once (dirname(__FILE__) . '/../Model.php');
+
+
+/**
  * MarketplaceWebServiceProducts_Model_LowestOfferListingType
- *
+ * 
  * Properties:
  * <ul>
- *
+ * 
  * <li>Qualifiers: MarketplaceWebServiceProducts_Model_QualifiersType</li>
  * <li>NumberOfOfferListingsConsidered: int</li>
  * <li>SellerFeedbackCount: int</li>
@@ -31,28 +38,25 @@
  *
  * </ul>
  */
-class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends MarketplaceWebServiceProducts_Model
-{
+
+ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends MarketplaceWebServiceProducts_Model {
 
     public function __construct($data = null)
     {
-        $this->_fields = array(
-            'Qualifiers' => array(
-                'FieldValue' => null,
-                'FieldType' => 'MarketplaceWebServiceProducts_Model_QualifiersType'
-            ),
-            'NumberOfOfferListingsConsidered' => array('FieldValue' => null, 'FieldType' => 'int'),
-            'SellerFeedbackCount' => array('FieldValue' => null, 'FieldType' => 'int'),
-            'Price' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_PriceType'),
-            'MultipleOffersAtLowestPrice' => array('FieldValue' => null, 'FieldType' => 'string'),
-        );
-        parent::__construct($data);
+    $this->_fields = array (
+    'Qualifiers' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_QualifiersType'),
+    'NumberOfOfferListingsConsidered' => array('FieldValue' => null, 'FieldType' => 'int'),
+    'SellerFeedbackCount' => array('FieldValue' => null, 'FieldType' => 'int'),
+    'Price' => array('FieldValue' => null, 'FieldType' => 'MarketplaceWebServiceProducts_Model_PriceType'),
+    'MultipleOffersAtLowestPrice' => array('FieldValue' => null, 'FieldType' => 'string'),
+    );
+    parent::__construct($data);
     }
 
     /**
      * Get the value of the Qualifiers property.
      *
-     * @return MarketplaceWebServiceProducts_Model_QualifiersType Qualifiers.
+     * @return QualifiersType Qualifiers.
      */
     public function getQualifiers()
     {
@@ -62,8 +66,8 @@ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends Marketp
     /**
      * Set the value of the Qualifiers property.
      *
-     * @param MarketplaceWebServiceProducts_Model_QualifiersType $value qualifiers
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_QualifiersType qualifiers
+     * @return this instance
      */
     public function setQualifiers($value)
     {
@@ -78,8 +82,8 @@ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends Marketp
      */
     public function isSetQualifiers()
     {
-        return !is_null($this->_fields['Qualifiers']['FieldValue']);
-    }
+                return !is_null($this->_fields['Qualifiers']['FieldValue']);
+            }
 
     /**
      * Set the value of Qualifiers, return this.
@@ -87,7 +91,7 @@ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends Marketp
      * @param qualifiers
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withQualifiers($value)
     {
@@ -108,8 +112,8 @@ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends Marketp
     /**
      * Set the value of the NumberOfOfferListingsConsidered property.
      *
-     * @param int $value numberOfOfferListingsConsidered
-     * @return $this This instance
+     * @param int numberOfOfferListingsConsidered
+     * @return this instance
      */
     public function setNumberOfOfferListingsConsidered($value)
     {
@@ -124,8 +128,8 @@ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends Marketp
      */
     public function isSetNumberOfOfferListingsConsidered()
     {
-        return !is_null($this->_fields['NumberOfOfferListingsConsidered']['FieldValue']);
-    }
+                return !is_null($this->_fields['NumberOfOfferListingsConsidered']['FieldValue']);
+            }
 
     /**
      * Set the value of NumberOfOfferListingsConsidered, return this.
@@ -133,7 +137,7 @@ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends Marketp
      * @param numberOfOfferListingsConsidered
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withNumberOfOfferListingsConsidered($value)
     {
@@ -154,8 +158,8 @@ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends Marketp
     /**
      * Set the value of the SellerFeedbackCount property.
      *
-     * @param int $value sellerFeedbackCount
-     * @return $this This instance
+     * @param int sellerFeedbackCount
+     * @return this instance
      */
     public function setSellerFeedbackCount($value)
     {
@@ -170,8 +174,8 @@ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends Marketp
      */
     public function isSetSellerFeedbackCount()
     {
-        return !is_null($this->_fields['SellerFeedbackCount']['FieldValue']);
-    }
+                return !is_null($this->_fields['SellerFeedbackCount']['FieldValue']);
+            }
 
     /**
      * Set the value of SellerFeedbackCount, return this.
@@ -179,7 +183,7 @@ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends Marketp
      * @param sellerFeedbackCount
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withSellerFeedbackCount($value)
     {
@@ -190,7 +194,7 @@ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends Marketp
     /**
      * Get the value of the Price property.
      *
-     * @return MarketplaceWebServiceProducts_Model_PriceType Price.
+     * @return PriceType Price.
      */
     public function getPrice()
     {
@@ -200,8 +204,8 @@ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends Marketp
     /**
      * Set the value of the Price property.
      *
-     * @param MarketplaceWebServiceProducts_Model_PriceType $value price
-     * @return $this This instance
+     * @param MarketplaceWebServiceProducts_Model_PriceType price
+     * @return this instance
      */
     public function setPrice($value)
     {
@@ -216,8 +220,8 @@ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends Marketp
      */
     public function isSetPrice()
     {
-        return !is_null($this->_fields['Price']['FieldValue']);
-    }
+                return !is_null($this->_fields['Price']['FieldValue']);
+            }
 
     /**
      * Set the value of Price, return this.
@@ -225,7 +229,7 @@ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends Marketp
      * @param price
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withPrice($value)
     {
@@ -246,8 +250,8 @@ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends Marketp
     /**
      * Set the value of the MultipleOffersAtLowestPrice property.
      *
-     * @param string $value multipleOffersAtLowestPrice
-     * @return $this This instance
+     * @param string multipleOffersAtLowestPrice
+     * @return this instance
      */
     public function setMultipleOffersAtLowestPrice($value)
     {
@@ -262,8 +266,8 @@ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends Marketp
      */
     public function isSetMultipleOffersAtLowestPrice()
     {
-        return !is_null($this->_fields['MultipleOffersAtLowestPrice']['FieldValue']);
-    }
+                return !is_null($this->_fields['MultipleOffersAtLowestPrice']['FieldValue']);
+            }
 
     /**
      * Set the value of MultipleOffersAtLowestPrice, return this.
@@ -271,7 +275,7 @@ class MarketplaceWebServiceProducts_Model_LowestOfferListingType extends Marketp
      * @param multipleOffersAtLowestPrice
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withMultipleOffersAtLowestPrice($value)
     {

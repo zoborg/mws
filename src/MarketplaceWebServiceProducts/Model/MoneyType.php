@@ -1,43 +1,50 @@
 <?php
 /*******************************************************************************
- * Copyright 2009-2014 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright 2009-2016 Amazon Services. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
  *
- * You may not use this file except in compliance with the License.
+ * You may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
  * specific language governing permissions and limitations under the License.
  *******************************************************************************
  * PHP Version 5
  * @category Amazon
  * @package  Marketplace Web Service Products
  * @version  2011-10-01
- * Library Version: 2014-10-20
- * Generated: Fri Oct 17 17:59:56 GMT 2014
+ * Library Version: 2016-06-01
+ * Generated: Fri Sep 16 11:49:32 PDT 2016
  */
 
 /**
+ *  @see MarketplaceWebServiceProducts_Model
+ */
+
+require_once (dirname(__FILE__) . '/../Model.php');
+
+
+/**
  * MarketplaceWebServiceProducts_Model_MoneyType
- *
+ * 
  * Properties:
  * <ul>
- *
+ * 
  * <li>CurrencyCode: string</li>
  * <li>Amount: float</li>
  *
  * </ul>
  */
-class MarketplaceWebServiceProducts_Model_MoneyType extends MarketplaceWebServiceProducts_Model
-{
+
+ class MarketplaceWebServiceProducts_Model_MoneyType extends MarketplaceWebServiceProducts_Model {
 
     public function __construct($data = null)
     {
-        $this->_fields = array(
-            'CurrencyCode' => array('FieldValue' => null, 'FieldType' => 'string'),
-            'Amount' => array('FieldValue' => null, 'FieldType' => 'float'),
-        );
-        parent::__construct($data);
+    $this->_fields = array (
+    'CurrencyCode' => array('FieldValue' => null, 'FieldType' => 'string'),
+    'Amount' => array('FieldValue' => null, 'FieldType' => 'float'),
+    );
+    parent::__construct($data);
     }
 
     /**
@@ -53,8 +60,8 @@ class MarketplaceWebServiceProducts_Model_MoneyType extends MarketplaceWebServic
     /**
      * Set the value of the CurrencyCode property.
      *
-     * @param string $value currencyCode
-     * @return $this This instance
+     * @param string currencyCode
+     * @return this instance
      */
     public function setCurrencyCode($value)
     {
@@ -69,8 +76,8 @@ class MarketplaceWebServiceProducts_Model_MoneyType extends MarketplaceWebServic
      */
     public function isSetCurrencyCode()
     {
-        return !is_null($this->_fields['CurrencyCode']['FieldValue']);
-    }
+                return !is_null($this->_fields['CurrencyCode']['FieldValue']);
+            }
 
     /**
      * Set the value of CurrencyCode, return this.
@@ -78,7 +85,7 @@ class MarketplaceWebServiceProducts_Model_MoneyType extends MarketplaceWebServic
      * @param currencyCode
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withCurrencyCode($value)
     {
@@ -89,7 +96,7 @@ class MarketplaceWebServiceProducts_Model_MoneyType extends MarketplaceWebServic
     /**
      * Get the value of the Amount property.
      *
-     * @return float Amount.
+     * @return BigDecimal Amount.
      */
     public function getAmount()
     {
@@ -99,8 +106,8 @@ class MarketplaceWebServiceProducts_Model_MoneyType extends MarketplaceWebServic
     /**
      * Set the value of the Amount property.
      *
-     * @param float $value amount
-     * @return $this This instance
+     * @param float amount
+     * @return this instance
      */
     public function setAmount($value)
     {
@@ -115,8 +122,8 @@ class MarketplaceWebServiceProducts_Model_MoneyType extends MarketplaceWebServic
      */
     public function isSetAmount()
     {
-        return !is_null($this->_fields['Amount']['FieldValue']);
-    }
+                return !is_null($this->_fields['Amount']['FieldValue']);
+            }
 
     /**
      * Set the value of Amount, return this.
@@ -124,7 +131,7 @@ class MarketplaceWebServiceProducts_Model_MoneyType extends MarketplaceWebServic
      * @param amount
      *             The new value to set.
      *
-     * @return $this This instance.
+     * @return This instance.
      */
     public function withAmount($value)
     {
